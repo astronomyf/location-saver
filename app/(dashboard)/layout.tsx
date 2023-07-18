@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <aside className="max-w-[100px]">
         <Sidenav />
       </aside>
-      <main className="flex flex-1">{children}</main>
+      <main className="flex flex-1 bg-slate-100 p-4">{children}</main>
     </div>
   );
 }
