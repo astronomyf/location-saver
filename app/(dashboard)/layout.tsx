@@ -7,7 +7,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <div className="min-h-screen bg-background flex w-full">
-      <aside className="max-w-[100px]">
+      <aside className="w-[70px]">
         <Sidenav />
       </aside>
       <main className="flex flex-1 bg-slate-100 p-4">{children}</main>

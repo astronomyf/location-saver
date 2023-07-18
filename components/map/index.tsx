@@ -3,6 +3,10 @@
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef } from "react";
+import { atom } from "jotai";
+import MapControls from "./controls";
+
+export const enlargeMapAtom = atom<boolean>(false);
 
 const Map = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -21,7 +25,14 @@ const Map = () => {
     });
   }, []);
 
-  return <div ref={mapContainer} className="flex flex-1" />;
+  return (
+    <div className="flex flex-1 relative">
+      <div ref={mapContainer} className="flex flex-1" />
+      <div className="absolute top-4 right-4">
+        <MapControls mapInstance={map.current} />
+      </div>
+    </div>
+  );
 };
 
 export default Map;

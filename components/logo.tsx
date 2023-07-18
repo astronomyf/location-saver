@@ -34,11 +34,11 @@ const Logo = ({ className = "", withBackground = false }: LogoProps) => {
   return (
     <div
       className={cn(
-        "w-12 h-12 bg-primary text-primary-background rounded-xl p-1 flex justify-center items-center",
+        "w-11 h-11 bg-primary text-primary-background rounded-lg p-1 flex justify-center items-center border border-blue-500",
         className
       )}
     >
-      <EarthLogo className="w-8 h-8" color={"#ffffff"} />
+      <EarthLogo className="w-7 h-7" color={"#ffffff"} />
     </div>
   );
 };

@@ -1,2 +1,9 @@
 "use client";
-export { MapPin, MapTrifold } from "@phosphor-icons/react";
+export {
+  MapPin,
+  MapTrifold,
+  ArrowsOut,
+  ArrowsIn,
+  Plus,
+  Minus,
+} from "@phosphor-icons/react";
