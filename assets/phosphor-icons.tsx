@@ -6,4 +6,8 @@ export {
   ArrowsIn,
   Plus,
   Minus,
+  MagnifyingGlass,
+  MapPinLine,
+  PlusCircle,
+  Binoculars,
 } from "@phosphor-icons/react";
