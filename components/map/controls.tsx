@@ -3,6 +3,7 @@ import { enlargeMapAtom } from ".";
 import { ArrowsIn, ArrowsOut, Minus, Plus } from "@/assets/phosphor-icons";
 import { Map } from "maplibre-gl";
 import { useEffect, useState } from "react";
+import { useMapZoomDisabled } from "@/lib/hooks/useMapZoomDisabled";
 
 interface MapControlsProps {
   mapInstance: Map | null;
@@ -11,26 +12,7 @@ interface MapControlsProps {
 const MapControls = ({ mapInstance }: MapControlsProps) => {
   const [enlargeMap, setEnlargeMap] = useAtom(enlargeMapAtom);
 
-  const [zoomInDisabled, setZoomInDisabled] = useState<boolean>(false);
-  const [zoomOutDisabled, setZoomOutDisabled] = useState<boolean>(false);
-
-  const checkCurrentZoom = (mapInstance: Map) => {
-    setZoomInDisabled(
-      Math.round(mapInstance.getZoom()) === mapInstance.getMaxZoom()
-    );
-    setZoomOutDisabled(Math.floor(mapInstance.getZoom()) === 0);
-  };
-
-  useEffect(() => {
-    if (!mapInstance) return;
-
-    mapInstance.on("zoom", () => checkCurrentZoom(mapInstance));
-
-    // Cleanup
-    return () => {
-      mapInstance.off("zoom", () => checkCurrentZoom(mapInstance));
-    };
-  }, [mapInstance]);
+  const { zoomInDisabled, zoomOutDisabled } = useMapZoomDisabled(mapInstance);
 
   if (!mapInstance) return null;
 
