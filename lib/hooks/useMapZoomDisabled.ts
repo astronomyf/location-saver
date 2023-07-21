@@ -6,10 +6,10 @@ export const useMapZoomDisabled = (mapInstance?: Map | null) => {
   const [zoomOutDisabled, setZoomOutDisabled] = useState<boolean>(false);
 
   const checkCurrentZoom = (mapInstance: Map) => {
-    const shouldDisableZoomIn =
-      Math.round(mapInstance.getZoom()) === mapInstance.getMaxZoom();
+    const currentZoom = Math.round(mapInstance.getZoom());
 
-    const shouldDisableZoomOut = Math.round(mapInstance.getZoom()) === 0;
+    const shouldDisableZoomIn = currentZoom === mapInstance.getMaxZoom();
+    const shouldDisableZoomOut = currentZoom === 0;
 
     if (shouldDisableZoomIn) void setZoomInDisabled(shouldDisableZoomIn);
     if (shouldDisableZoomOut) void setZoomOutDisabled(shouldDisableZoomOut);

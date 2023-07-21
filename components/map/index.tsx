@@ -7,7 +7,7 @@ import { atom } from "jotai";
 import MapControls from "./controls";
 import MapActions from "./actions";
 
-export const enlargeMapAtom = atom<boolean>(false);
+export const enlargeMapAtom = atom<boolean>(true);
 
 const Map = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -20,7 +20,7 @@ const Map = () => {
     // Init map
     const initMap = new maplibregl.Map({
       container: mapContainer.current,
-      style: `https://api.maptiler.com/maps/outdoor-v2/style.json?key=JD0dQfo7nF5PATG7r3XA`,
+      style: `https://api.maptiler.com/maps/outdoor-v2/style.json?key=`, // JD0dQfo7nF5PATG7r3XA
       center: [146.6639, -42.6685],
       zoom: 11,
     });

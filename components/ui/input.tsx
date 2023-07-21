@@ -7,20 +7,22 @@ export type InputActions = {
   icon: React.ReactNode;
   onClick?: () => void;
   tooltipText?: string;
+  className?: string;
 };
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode;
   actions?: InputActions[];
+  containerClassName?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, icon, actions, ...props }, ref) => {
+  ({ className, type, icon, actions, containerClassName, ...props }, ref) => {
     const hasActions = !isEmpty(actions);
 
     return (
-      <div className="flex shadow-md rounded-md">
+      <div className={cn("flex shadow-md rounded-md", containerClassName)}>
         <div className="relative">
           <input
             type={type}
@@ -42,10 +44,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         {actions &&
-          actions.map(({ icon, tooltipText }, i) => (
+          actions.map(({ icon, tooltipText, className }, i) => (
             <Tooltip key={i}>
               <TooltipTrigger asChild>
-                <button className="focus:outline-none overflow-auto focus:z-20 focus:ring-2 focus:ring-ring justify-center bg-background hover:bg-slate-50 text-primary right-0 flex items-center px-2 last-of-type:pr-3 border-y last-of-type:border-r last-of-type:rounded-r-md border-l transition-all ease-in-out cursor-pointer">
+                <button
+                  className={cn(
+                    "focus:outline-none overflow-auto focus:z-20 focus:ring-2 focus:ring-ring justify-center bg-background hover:bg-slate-50 text-primary right-0 flex items-center px-2 last-of-type:pr-3 border-y last-of-type:border-r last-of-type:rounded-r-md border-l transition-all ease-in-out cursor-pointer",
+                    className
+                  )}
+                >
                   {icon}
                 </button>
               </TooltipTrigger>

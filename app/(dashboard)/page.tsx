@@ -3,9 +3,18 @@
 import Map, { enlargeMapAtom } from "@/components/map";
 import { cn } from "@/lib/utils";
 import { useAtomValue } from "jotai";
+import { useEffect } from "react";
 
 export default function MapPage() {
   const enlargeMap = useAtomValue(enlargeMapAtom);
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetch("/api/places/search/torino");
+      const json = await data.json();
+      console.log("json", json);
+    })();
+  }, []);
 
   return (
     <div className="flex w-full justify-between gap-x-4">

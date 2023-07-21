@@ -10,4 +10,5 @@ export {
   MapPinLine,
   PlusCircle,
   Binoculars,
+  Stack,
 } from "@phosphor-icons/react";
