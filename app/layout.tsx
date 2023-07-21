@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import QueryWrapper from "@/components/query-wrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TooltipProvider delayDuration={100} skipDelayDuration={10}>
-          {children}
-        </TooltipProvider>
+        <QueryWrapper>
+          <TooltipProvider delayDuration={100} skipDelayDuration={10}>
+            {children}
+          </TooltipProvider>
+        </QueryWrapper>
       </body>
     </html>
   );

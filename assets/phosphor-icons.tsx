@@ -11,4 +11,5 @@ export {
   PlusCircle,
   Binoculars,
   Stack,
+  CircleNotch,
 } from "@phosphor-icons/react";

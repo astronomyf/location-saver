@@ -1,5 +1,6 @@
 import {
   Binoculars,
+  CircleNotch,
   MagnifyingGlass,
   MapPin,
   Plus,
@@ -7,36 +8,65 @@ import {
 import { Input } from "../ui/input";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useDebounce } from "usehooks-ts";
+import { useSearchPlaceQuery } from "@/lib/hooks/queries/useSearchPlaceQuery";
+import { atom, useAtom } from "jotai";
+import Suggestions from "./suggestions";
+
+export const searchOpenAtom = atom<boolean>(false);
 
 const MapActions = () => {
-  const [searchOpen, setSearchOpen] = useState<boolean>(false);
+  const [searchOpen, setSearchOpen] = useAtom(searchOpenAtom);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const debouncedQuery = useDebounce(searchQuery, 500);
+  const { data, status, isLoading, isFetching } =
+    useSearchPlaceQuery(debouncedQuery);
+
+  const suggestions = status === "success" ? data.features : [];
+  const loading = isLoading && isFetching;
+
+  const hasSuggestions = searchOpen && searchQuery.length > 2;
 
   const handleOnBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const { currentTarget, relatedTarget } = e;
     if (!relatedTarget) void setSearchOpen(false);
 
-    const parentInputElement =
-      currentTarget.parentElement?.parentElement?.parentElement;
+    const parentInputElement = currentTarget.closest(
+      "#navigation-input-wrapper"
+    );
 
     if (parentInputElement === relatedTarget?.parentElement) return;
 
     setSearchOpen(false);
+    setSearchQuery("");
   };
 
   return (
-    <div className={cn("flex flex-col", searchOpen && "shadow-md rounded-md")}>
+    <div
+      id="navigation-input-wrapper"
+      className={cn("flex flex-col", hasSuggestions && "shadow-md rounded-md")}
+    >
       <Input
         type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Search for a location"
-        icon={<MagnifyingGlass className="w-5 h-5" />}
+        icon={
+          loading ? (
+            <CircleNotch className="w-5 h-5 animate-spin" />
+          ) : (
+            <MagnifyingGlass className="w-5 h-5" />
+          )
+        }
         onFocus={() => setSearchOpen(true)}
         onBlur={handleOnBlur}
         className={cn(
           "focus-visible:!ring-0 focus-visible:!ring-offset-0",
-          searchOpen && "!rounded-b-none"
+          hasSuggestions && "!rounded-b-none"
         )}
         containerClassName={cn(
-          searchOpen && "!rounded-t-md !rounded-none !shadow-none"
+          hasSuggestions && "!rounded-t-md !rounded-none !shadow-none"
         )}
         actions={[
           {
@@ -53,23 +83,11 @@ const MapActions = () => {
           {
             icon: <Binoculars weight="fill" className="w-5 h-5" />,
             tooltipText: "Add explorer's levels",
-            className: cn(searchOpen && "!rounded-b-none"),
+            className: cn(hasSuggestions && "!rounded-b-none"),
           },
         ]}
       />
-      {searchOpen && (
-        <ul
-          tabIndex={1}
-          onBlur={() => setSearchOpen(false)}
-          onMouseDown={() => setSearchOpen(true)}
-          className="px-3 py-2 bg-background shadow-sm rounded-b-md flex flex-col gap-y-2 border-b border-x border-slate-200"
-        >
-          <li className="flex gap-x-2 text-sm items-center">
-            <MapPin className="w-4 h-4 text-slate-400" weight="fill" />
-            <b>Torino</b>
-          </li>
-        </ul>
-      )}
+      <Suggestions data={suggestions} hidden={!hasSuggestions} />
     </div>
   );
 };
