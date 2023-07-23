@@ -4,7 +4,6 @@ import MapView, {
   MapProvider,
   Marker,
   MapLayerMouseEvent,
-  useMap,
 } from "react-map-gl/maplibre";
 import type { MapRef } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -27,22 +26,13 @@ const Map = () => {
   const activeMapStyle = useAtomValue(activeMapStyleAtom);
   const [addPointMode, setAddPointMode] = useAtom(addPointModeAtom);
 
-  const { map, current } = useMap();
-
   const handleOnMapClick = (event: MapLayerMouseEvent) => {
     if (!addPointMode) return;
 
-    console.log("event", event.features);
-
     const { lngLat } = event;
-    const feature = mapRef.current?.queryRenderedFeatures([
-      event.point.x,
-      event.point.y,
-    ]);
-
-    console.log("feature", feature);
 
     setMarker({ latitude: lngLat.lat, longitude: lngLat.lng });
+    mapRef.current?.flyTo({ center: [lngLat.lng, lngLat.lat] });
     setAddPointMode(false);
   };
 

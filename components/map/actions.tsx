@@ -105,8 +105,12 @@ const MapActions = () => {
             icon: (
               <div className="relative">
                 <MapPin weight="fill" className="w-5 h-5" />
-                <div className="absolute bottom-0 left-3 text-primary w-2.5 h-2.5 bg-white rounded-full flex justify-center items-center">
-                  <Plus weight="bold" className="text-primary w-2 h-2" />
+                <div
+                  className={
+                    "absolute bottom-0 left-3 text-primary w-2.5 h-2.5 rounded-full flex justify-center items-center bg-white"
+                  }
+                >
+                  <Plus weight="bold" className={"w-2 h-2 text-primary"} />
                 </div>
               </div>
             ),
