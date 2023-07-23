@@ -51,7 +51,6 @@ const Suggestions = ({ data, hidden = false }: SuggestionsProps) => {
               setMarker({
                 latitude: coords[1],
                 longitude: coords[0],
-                label: mainName,
               });
             }}
           >

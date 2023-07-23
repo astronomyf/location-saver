@@ -44,7 +44,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         {actions &&
-          actions.map(({ icon, tooltipText, className }, i) => (
+          actions.map(({ icon, tooltipText, className, onClick }, i) => (
             <Tooltip key={i}>
               <TooltipTrigger asChild>
                 <button
@@ -52,6 +52,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     "focus:outline-none overflow-auto focus:z-20 focus:ring-2 focus:ring-ring justify-center bg-background hover:bg-slate-50 text-primary right-0 flex items-center px-2 last-of-type:pr-3 border-y last-of-type:border-r last-of-type:rounded-r-md border-l transition-all ease-in-out cursor-pointer",
                     className
                   )}
+                  onClick={onClick}
                 >
                   {icon}
                 </button>

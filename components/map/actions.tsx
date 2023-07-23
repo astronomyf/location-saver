@@ -19,12 +19,14 @@ import { useEffect } from "react";
 
 export const searchOpenAtom = atom<boolean>(false);
 export const searchQueryAtom = atom<string>("");
+export const addPointModeAtom = atom<boolean>(false);
 
 const MapActions = () => {
   const [searchOpen, setSearchOpen] = useAtom(searchOpenAtom);
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
 
   const setMarker = useSetAtom(markerAtom);
+  const setAddPointMode = useSetAtom(addPointModeAtom);
 
   const queryClient = useQueryClient();
 
@@ -109,6 +111,7 @@ const MapActions = () => {
               </div>
             ),
             tooltipText: "Add a new location",
+            onClick: () => setAddPointMode(true),
           },
           {
             icon: <Binoculars weight="fill" className="w-5 h-5" />,
