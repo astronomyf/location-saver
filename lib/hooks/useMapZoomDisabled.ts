@@ -1,11 +1,11 @@
-import { Map } from "maplibre-gl";
+import { MapInstance } from "@/types/map/generic";
 import { useEffect, useState } from "react";
 
-export const useMapZoomDisabled = (mapInstance?: Map | null) => {
+export const useMapZoomDisabled = (mapInstance?: MapInstance) => {
   const [zoomInDisabled, setZoomInDisabled] = useState<boolean>(false);
   const [zoomOutDisabled, setZoomOutDisabled] = useState<boolean>(false);
 
-  const checkCurrentZoom = (mapInstance: Map) => {
+  const checkCurrentZoom = (mapInstance: MapInstance) => {
     const currentZoom = Math.round(mapInstance.getZoom());
 
     const shouldDisableZoomIn = currentZoom === mapInstance.getMaxZoom();

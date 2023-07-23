@@ -21,4 +21,5 @@ export const useSearchPlaceQuery = (query: string) =>
     enabled: query.length > 2,
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
+    keepPreviousData: true,
   });

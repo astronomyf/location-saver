@@ -11,10 +11,10 @@ const Sidenav = () => {
         <Divider />
         <ul className="flex flex-col gap-y-4">
           <SidenavItem href="/">
-            <MapTrifold size="md" />
+            <MapTrifold className="w-6 h-6" />
           </SidenavItem>
           <SidenavItem href="/locations">
-            <MapPin size="md" />
+            <MapPin className="w-6 h-6" />
           </SidenavItem>
         </ul>
       </div>

@@ -12,4 +12,6 @@ export {
   Binoculars,
   Stack,
   CircleNotch,
+  PushPin,
+  X,
 } from "@phosphor-icons/react";

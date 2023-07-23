@@ -27,7 +27,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             type={type}
             className={cn(
-              "focus:z-20 h-10 w-full block bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+              "focus:z-20 h-10 w-full block bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
               icon && "pr-10",
               hasActions
                 ? "border-y border-l rounded-l-md"
@@ -38,7 +38,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           {icon && (
-            <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-4">
+            <div className="absolute inset-y-0 right-0 flex items-center pr-4">
               {icon}
             </div>
           )}

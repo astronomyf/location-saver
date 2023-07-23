@@ -4,20 +4,29 @@ import {
   MagnifyingGlass,
   MapPin,
   Plus,
+  X,
 } from "@/assets/phosphor-icons";
 import { Input } from "../ui/input";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useDebounce } from "usehooks-ts";
 import { useSearchPlaceQuery } from "@/lib/hooks/queries/useSearchPlaceQuery";
-import { atom, useAtom } from "jotai";
+import { atom, useAtom, useSetAtom } from "jotai";
 import Suggestions from "./suggestions";
+import { isEmpty } from "lodash";
+import { markerAtom } from ".";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 export const searchOpenAtom = atom<boolean>(false);
+export const searchQueryAtom = atom<string>("");
 
 const MapActions = () => {
   const [searchOpen, setSearchOpen] = useAtom(searchOpenAtom);
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
+
+  const setMarker = useSetAtom(markerAtom);
+
+  const queryClient = useQueryClient();
 
   const debouncedQuery = useDebounce(searchQuery, 500);
   const { data, status, isLoading, isFetching } =
@@ -26,7 +35,8 @@ const MapActions = () => {
   const suggestions = status === "success" ? data.features : [];
   const loading = isLoading && isFetching;
 
-  const hasSuggestions = searchOpen && searchQuery.length > 2;
+  const hasSuggestions =
+    searchOpen && searchQuery.length > 2 && !isEmpty(suggestions);
 
   const handleOnBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const { currentTarget, relatedTarget } = e;
@@ -42,6 +52,21 @@ const MapActions = () => {
     setSearchQuery("");
   };
 
+  const resetSearch = () => {
+    setMarker(null);
+    setSearchOpen(false);
+    searchQuery && setSearchQuery("");
+
+    queryClient.invalidateQueries({ queryKey: ["searchPlace"] });
+    queryClient.setQueryData(["searchPlace"], { features: [] });
+  };
+
+  useEffect(() => {
+    if (searchQuery) return;
+
+    resetSearch();
+  }, [searchQuery]);
+
   return (
     <div
       id="navigation-input-wrapper"
@@ -55,6 +80,11 @@ const MapActions = () => {
         icon={
           loading ? (
             <CircleNotch className="w-5 h-5 animate-spin" />
+          ) : searchQuery ? (
+            <X
+              className="w-5 h-5 hover:opacity-50 cursor-pointer"
+              onClick={resetSearch}
+            />
           ) : (
             <MagnifyingGlass className="w-5 h-5" />
           )
@@ -62,8 +92,8 @@ const MapActions = () => {
         onFocus={() => setSearchOpen(true)}
         onBlur={handleOnBlur}
         className={cn(
-          "focus-visible:!ring-0 focus-visible:!ring-offset-0",
-          hasSuggestions && "!rounded-b-none"
+          hasSuggestions &&
+            "!rounded-b-none focus-visible:!ring-0 focus-visible:!ring-offset-0"
         )}
         containerClassName={cn(
           hasSuggestions && "!rounded-t-md !rounded-none !shadow-none"

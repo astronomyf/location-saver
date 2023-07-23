@@ -26,9 +26,11 @@ export interface QueryPlacesProperties {
   "osm:place_type"?: string;
 }
 
+export type LngLat = [number, number];
+
 export interface QueryPlacesGeometry {
   type: string;
-  coordinates: number[];
+  coordinates: LngLat;
 }
 
 export interface QueryPlacesContext {

@@ -1,43 +1,47 @@
 "use client";
 
-import maplibregl from "maplibre-gl";
+import MapView, { MapProvider, Marker } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { useEffect, useRef } from "react";
-import { atom, useAtom } from "jotai";
+import { atom, useAtomValue } from "jotai";
 import MapControls from "./controls";
 import MapActions from "./actions";
+import MarkerCustom from "./marker";
+import { MarkerCustomType } from "@/types/map/marker";
+import { activeMapStyleAtom, mapStyles } from "./choose-map-style";
 
 export const enlargeMapAtom = atom<boolean>(true);
-export const mapInstanceAtom = atom<maplibregl.Map | null>(null);
+export const markerAtom = atom<MarkerCustomType | null>(null);
 
 const Map = () => {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const [mapInstance, setMapInstance] = useAtom(mapInstanceAtom);
-
-  useEffect(() => {
-    if (mapInstance) return;
-    if (!mapContainer.current) return;
-
-    // Init map
-    const initMap = new maplibregl.Map({
-      container: mapContainer.current,
-      style: `https://api.maptiler.com/maps/outdoor-v2/style.json?key=JD0dQfo7nF5PATG7r3XA`, // JD0dQfo7nF5PATG7r3XA
-      center: [146.6639, -42.6685],
-      zoom: 11,
-    });
-
-    setMapInstance(initMap);
-  }, [mapInstance, setMapInstance]);
+  const marker = useAtomValue(markerAtom);
+  const activeMapStyle = useAtomValue(activeMapStyleAtom);
 
   return (
     <div className="flex flex-1 relative">
-      <div ref={mapContainer} className="flex flex-1" />
-      <div className="absolute top-4 right-4">
-        <MapControls mapInstance={mapInstance} />
-      </div>
-      <div className="absolute top-4 left-4">
-        <MapActions />
-      </div>
+      <MapProvider>
+        <MapView
+          id="map"
+          initialViewState={{
+            longitude: 146.6639,
+            latitude: -42.6685,
+            zoom: 11,
+          }}
+          mapStyle={mapStyles[activeMapStyle].url}
+          style={{ flex: 1 }}
+        >
+          {marker && (
+            <Marker latitude={marker.latitude} longitude={marker.longitude}>
+              <MarkerCustom />
+            </Marker>
+          )}
+        </MapView>
+        <div className="absolute top-4 right-4">
+          <MapControls />
+        </div>
+        <div className="absolute top-4 left-4">
+          <MapActions />
+        </div>
+      </MapProvider>
     </div>
   );
 };
