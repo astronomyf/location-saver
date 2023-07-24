@@ -46,7 +46,7 @@ const PointPreview = ({ mapInstance }: PointPreviewProps) => {
         <div className="grid grid-cols-2 gap-x-2 border-t border-slate-200 p-4">
           <Button>
             <Plus className="w-4 h-4 mr-2" />
-            Quick add
+            Create
           </Button>
           <Button variant="secondary">Clear</Button>
         </div>
