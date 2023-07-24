@@ -49,7 +49,7 @@ const Map = () => {
           }}
           mapStyle={mapStyles[activeMapStyle].url}
           style={{ flex: 1 }}
-          cursor={addPointMode ? "crosshair" : "auto"}
+          cursor={addPointMode ? "crosshair" : undefined}
           onClick={handleOnMapClick}
         >
           {marker && (
