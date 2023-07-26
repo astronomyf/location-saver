@@ -1,11 +1,14 @@
 "use client";
 
 import Map, { enlargeMapAtom } from "@/components/map";
+import { useAuthState } from "@/lib/hooks/firebase/useAuthState";
 import { cn } from "@/lib/utils";
 import { useAtomValue } from "jotai";
 
 export default function MapPage() {
   const enlargeMap = useAtomValue(enlargeMapAtom);
+
+  const [user, loading] = useAuthState();
 
   return (
     <div className="flex w-full justify-between gap-x-4">

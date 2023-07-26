@@ -34,9 +34,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const hasActions = !isEmpty(actions);
 
     return (
-      <div className="w-full flex flex-col gap-y-1">
+      <div className={cn("w-full", error && "flex flex-col gap-y-1")}>
         <div className={cn("flex shadow-sm rounded-md", containerClassName)}>
-          <div className="relative w-full">
+          <div className="relative w-full flex">
             <input
               type={type}
               className={cn(
@@ -65,7 +65,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 <TooltipTrigger asChild>
                   <button
                     className={cn(
-                      "focus:outline-none overflow-auto focus:z-20 focus:ring-2 focus:ring-ring justify-center bg-background hover:bg-slate-50 text-primary right-0 flex items-center px-2 last-of-type:pr-3 border-y last-of-type:border-r last-of-type:rounded-r-md border-l transition-all ease-in-out cursor-pointer",
+                      "focus:outline-none overflow-auto min-w-fit focus:z-20 focus:ring-2 focus:ring-ring justify-center bg-background hover:bg-slate-50 text-primary right-0 flex items-center px-2 last-of-type:pr-2.5 border-y last-of-type:border-r last-of-type:rounded-r-md border-l transition-all ease-in-out cursor-pointer",
                       className
                     )}
                     onClick={onClick}

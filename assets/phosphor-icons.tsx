@@ -14,4 +14,7 @@ export {
   CircleNotch,
   PushPin,
   X,
+  Gear,
+  CreditCard,
+  SignOut,
 } from "@phosphor-icons/react";

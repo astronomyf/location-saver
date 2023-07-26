@@ -1,9 +1,15 @@
+"use client";
+
 import { MapPin, MapTrifold } from "@/assets/phosphor-icons";
 import SidenavItem from "./item";
 import Logo from "../logo";
 import Divider from "../ui/divider";
+import UserProfile from "../profile/user-profile";
+import { useAuthState } from "@/lib/hooks/firebase/useAuthState";
 
 const Sidenav = () => {
+  const [user] = useAuthState();
+
   return (
     <nav className="h-full w-full bg-background px-3 py-5 border-r border-slate-200 flex flex-col items-center justify-between">
       <div className="flex flex-col items-center">
@@ -20,7 +26,14 @@ const Sidenav = () => {
       </div>
       <div className="flex flex-col items-center">
         <Divider />
-        <div className="h-10 w-10 rounded-full bg-slate-300" />
+        <UserProfile
+          user={{
+            id: user?.uid || "",
+            createdAt: parseInt(user?.metadata.creationTime || "0"),
+            name: user?.displayName || "Francesco",
+            email: user?.email || "",
+          }}
+        />
       </div>
     </nav>
   );

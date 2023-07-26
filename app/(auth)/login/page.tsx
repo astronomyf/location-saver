@@ -4,9 +4,35 @@ import GoogleButton from "@/components/auth/google-button";
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { signInUserWithEmail } from "@/lib/auth/signInUserWithEmail";
 import Link from "next/link";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+type LoginFormData = {
+  email: string;
+  password: string;
+};
 
 export default function LoginPage() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>();
+
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      await signInUserWithEmail(data.email, data.password);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center">
       <Logo className="w-10 h-10 mx-auto mb-4" withBackground />
@@ -30,12 +56,28 @@ export default function LoginPage() {
           Or
         </div>
 
-        <div className="flex flex-col gap-y-3">
-          <Input placeholder="Email" width="full" />
-          <Input type="password" placeholder="Password" width="full" />
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-y-3"
+        >
+          <Input
+            placeholder="Email"
+            width="full"
+            error={errors.email?.message}
+            {...register("email", { required: "Email is required" })}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            width="full"
+            error={errors.password?.message}
+            {...register("password", { required: "Password is required" })}
+          />
 
-          <Button className="w-full mt-2">Login</Button>
-        </div>
+          <Button type="submit" className="w-full mt-2" loading={loading}>
+            Login
+          </Button>
+        </form>
       </div>
     </div>
   );

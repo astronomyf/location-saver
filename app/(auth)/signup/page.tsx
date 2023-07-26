@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createUserWithEmail } from "@/lib/auth/createUserWithEmail";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 type SignupFormData = {
@@ -21,8 +22,17 @@ export default function SignupPage() {
     formState: { errors },
   } = useForm<SignupFormData>();
 
-  const onSubmit = async (data: SignupFormData) =>
-    await createUserWithEmail(data.email, data.password);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const onSubmit = async (data: SignupFormData) => {
+    try {
+      await createUserWithEmail(data.email, data.password);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center">
@@ -75,7 +85,7 @@ export default function SignupPage() {
             })}
           />
 
-          <Button type="submit" className="w-full mt-2">
+          <Button loading={loading} type="submit" className="w-full mt-2">
             Sign up
           </Button>
         </form>
