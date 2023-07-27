@@ -32,6 +32,7 @@ const Sidenav = () => {
             createdAt: parseInt(user?.metadata.creationTime || "0"),
             name: user?.displayName || "Francesco",
             email: user?.email || "",
+            photoUrl: user?.photoURL || "",
           }}
         />
       </div>

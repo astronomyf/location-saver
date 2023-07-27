@@ -4,10 +4,13 @@ import GoogleButton from "@/components/auth/google-button";
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { authUserWithGoogle } from "@/lib/auth/authUserWithGoogle";
 import { createUserWithEmail } from "@/lib/auth/createUserWithEmail";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 type SignupFormData = {
   email: string;
@@ -22,11 +25,29 @@ export default function SignupPage() {
     formState: { errors },
   } = useForm<SignupFormData>();
 
+  const router = useRouter();
+
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit = async (data: SignupFormData) => {
     try {
       await createUserWithEmail(data.email, data.password);
+
+      toast.success("Account created successfully");
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const withGoogle = async () => {
+    try {
+      await authUserWithGoogle();
+
+      toast.success("Account created successfully");
+      router.push("/");
     } catch (error) {
       console.error(error);
     } finally {
@@ -51,7 +72,7 @@ export default function SignupPage() {
           </p>
         </div>
         <div className="flex flex-col gap-y-3 mt-2">
-          <GoogleButton label="Sign up with Google" />
+          <GoogleButton label="Sign up with Google" onClick={withGoogle} />
         </div>
         <div className="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6">
           Or

@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { signInUserWithEmail } from "@/lib/auth/signInUserWithEmail";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 type LoginFormData = {
   email: string;
@@ -21,11 +23,16 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm<LoginFormData>();
 
+  const router = useRouter();
+
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit = async (data: LoginFormData) => {
     try {
       await signInUserWithEmail(data.email, data.password);
+
+      toast.success("Logged in successfully");
+      router.push("/");
     } catch (err) {
       console.error(err);
     } finally {

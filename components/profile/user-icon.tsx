@@ -7,19 +7,23 @@ interface UserIconProps {
   user: User;
   className?: string;
   textClassName?: string;
+  clickable?: boolean;
 }
 
 const UserIcon = ({
   user: { photoUrl, name },
   className,
   textClassName,
+  clickable = true,
 }: UserIconProps) => {
   const userInitials = getInitials(name);
 
   return (
     <div
       className={cn(
-        "w-10 h-10 rounded-full bg-primary-soft hover:opacity-70 cursor-pointer transition-opacity ease-in-out",
+        "w-10 h-10 rounded-full bg-primary-soft relative",
+        clickable &&
+          "hover:opacity-70 cursor-pointer transition-opacity ease-in-out",
         !photoUrl && "border border-primary",
         className
       )}
@@ -28,7 +32,7 @@ const UserIcon = ({
         <Image
           src={photoUrl}
           fill
-          className="object-cover"
+          className="object-cover rounded-full"
           alt="Profile picture"
         />
       ) : (
