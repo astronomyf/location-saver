@@ -11,11 +11,12 @@ interface UserIconProps {
 }
 
 const UserIcon = ({
-  user: { photoUrl, name },
+  user,
   className,
   textClassName,
   clickable = true,
 }: UserIconProps) => {
+  const { photoUrl, name } = user;
   const userInitials = getInitials(name);
 
   return (

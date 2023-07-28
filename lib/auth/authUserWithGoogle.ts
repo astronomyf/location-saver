@@ -1,25 +1,31 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, db } from "../firebase/config";
-import { addDoc, collection } from "firebase/firestore/lite";
+import { doc, setDoc } from "firebase/firestore/lite";
+import { fetchDocument } from "../firebase/utils";
+import { User } from "@/types/firestore";
 
 export const authUserWithGoogle = async () => {
-  try {
-    const provider = new GoogleAuthProvider();
+  const provider = new GoogleAuthProvider();
 
-    auth.useDeviceLanguage();
-    const result = await signInWithPopup(auth, provider);
+  auth.useDeviceLanguage();
+  const result = await signInWithPopup(auth, provider);
 
-    const user = result.user;
+  const authUser = result.user;
 
-    // Add user to db
-    await addDoc(collection(db, "users"), {
-      email: user.email,
-      name: user?.displayName,
-      photoURL: user?.photoURL,
-      createdAt: Date.now(),
-    });
-  } catch (err) {
-    console.error(err);
-    // Add toast here
-  }
+  const user = await fetchDocument<User>("users", authUser.uid);
+  if (user) return user;
+
+  // Add user to db
+  const { email, displayName: name, photoURL } = authUser;
+  const newUser = {
+    email,
+    name,
+    photoUrl: photoURL,
+    providerId: provider.providerId,
+    createdAt: Date.now(),
+  };
+
+  await setDoc(doc(db, "users", authUser.uid), newUser);
+
+  return { id: authUser.uid, ...newUser } as User;
 };

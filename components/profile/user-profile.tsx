@@ -5,13 +5,15 @@ import Divider from "../ui/divider";
 import { CreditCard, Gear, MapTrifold, SignOut } from "@/assets/phosphor-icons";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase/config";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 interface UserProfileProps {
   user: User;
 }
 
 const UserProfile = ({ user }: UserProfileProps) => {
+  const router = useRouter();
+
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -42,8 +44,13 @@ const UserProfile = ({ user }: UserProfileProps) => {
               clickable={false}
             />
             <div className="flex flex-col ">
-              <h1 className="text-sm font-semibold">{user.name}</h1>
-              <p className="text-xs text-muted-foreground max-w-[130px] truncate">
+              <h1 className="text-sm font-semibold max-w-[130px] truncate">
+                {user.name.split(" ")[0]}
+              </h1>
+              <p
+                className="text-xs text-muted-foreground max-w-[130px] truncate"
+                title={user.email}
+              >
                 {user.email}
               </p>
             </div>

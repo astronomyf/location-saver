@@ -6,9 +6,13 @@ import Logo from "../logo";
 import Divider from "../ui/divider";
 import UserProfile from "../profile/user-profile";
 import { useAuthState } from "@/lib/hooks/firebase/useAuthState";
+import { useAtomValue } from "jotai";
+import { userAtom } from "@/lib/store/atoms";
 
 const Sidenav = () => {
-  const [user] = useAuthState();
+  const user = useAtomValue(userAtom);
+
+  if (!user) return null;
 
   return (
     <nav className="h-full w-full bg-background px-3 py-5 border-r border-slate-200 flex flex-col items-center justify-between">
@@ -26,15 +30,7 @@ const Sidenav = () => {
       </div>
       <div className="flex flex-col items-center">
         <Divider />
-        <UserProfile
-          user={{
-            id: user?.uid || "",
-            createdAt: parseInt(user?.metadata.creationTime || "0"),
-            name: user?.displayName || "Francesco",
-            email: user?.email || "",
-            photoUrl: user?.photoURL || "",
-          }}
-        />
+        <UserProfile user={user} />
       </div>
     </nav>
   );

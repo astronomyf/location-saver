@@ -1,5 +1,5 @@
 import { QueryPlacesFeature } from "@/types/map/places-query";
-import { isEmpty, values } from "lodash";
+import { isEmpty } from "lodash";
 
 type LocationProperties = {
   name: string;

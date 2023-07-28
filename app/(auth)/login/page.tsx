@@ -4,12 +4,10 @@ import GoogleButton from "@/components/auth/google-button";
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { signInUserWithEmail } from "@/lib/auth/signInUserWithEmail";
+import { useLogin } from "@/lib/hooks/auth/useLogin";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 
 type LoginFormData = {
   email: string;
@@ -23,22 +21,8 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm<LoginFormData>();
 
-  const router = useRouter();
-
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const onSubmit = async (data: LoginFormData) => {
-    try {
-      await signInUserWithEmail(data.email, data.password);
-
-      toast.success("Logged in successfully");
-      router.push("/");
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { signInWithEmail, signInWithGoogle, loading, googleLoading } =
+    useLogin();
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center">
@@ -57,14 +41,21 @@ export default function LoginPage() {
           </p>
         </div>
         <div className="flex flex-col gap-y-3 mt-2">
-          <GoogleButton label="Sign in with Google" />
+          <GoogleButton
+            loading={googleLoading}
+            label="Sign in with Google"
+            className={cn(googleLoading && "animate-pulse")}
+            onClick={signInWithGoogle}
+          />
         </div>
         <div className="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6">
           Or
         </div>
 
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit((data) =>
+            signInWithEmail(data.email, data.password)
+          )}
           className="flex flex-col gap-y-3"
         >
           <Input
