@@ -22,10 +22,10 @@ const UserIcon = ({
   return (
     <div
       className={cn(
-        "w-10 h-10 rounded-full bg-primary-soft relative",
+        "w-9 h-9 rounded-full bg-primary-soft relative",
         clickable &&
-          "hover:opacity-70 cursor-pointer transition-opacity ease-in-out",
-        !photoUrl && "border border-primary",
+          "hover:opacity-70 cursor-pointer transition-opacity ease-in-out border",
+        photoUrl ? "border-slate-200" : "border-primary",
         className
       )}
     >

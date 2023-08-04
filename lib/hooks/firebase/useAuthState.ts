@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { auth, db } from "@/lib/firebase/config";
+import { auth } from "@/lib/firebase/config";
 import { useAtom } from "jotai";
 import { userAtom } from "@/lib/store/atoms";
 import { fetchDocument } from "@/lib/firebase/utils";

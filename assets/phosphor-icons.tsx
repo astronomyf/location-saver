@@ -17,4 +17,7 @@ export {
   Gear,
   CreditCard,
   SignOut,
+  Mountains,
+  Park,
+  CaretRight,
 } from "@phosphor-icons/react";

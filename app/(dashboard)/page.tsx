@@ -11,10 +11,10 @@ export default function MapPage() {
   const [user, loading] = useAuthState();
 
   return (
-    <div className="flex w-full justify-between gap-x-4">
+    <div className="flex w-full justify-between">
       <div
         className={cn(
-          "bg-background rounded-md flex flex-auto overflow-hidden",
+          "bg-background flex flex-auto overflow-hidden",
           enlargeMap ? "w-full" : "w-3/4"
         )}
       >
@@ -22,11 +22,11 @@ export default function MapPage() {
       </div>
       <div
         className={cn(
-          "bg-background rounded-md p-4 flex flex-auto",
-          enlargeMap ? "hidden" : "w-1/4"
+          "bg-background p-4 flex flex-auto border-l border-slate-200",
+          enlargeMap ? "hidden" : "w-2/4"
         )}
       >
-        <h1>Detail</h1>
+        <h1 className="text-xl font-semibold">Discover</h1>
       </div>
     </div>
   );

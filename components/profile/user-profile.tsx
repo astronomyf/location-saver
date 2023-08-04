@@ -29,26 +29,15 @@ const UserProfile = ({ user }: UserProfileProps) => {
       <PopoverTrigger>
         <UserIcon user={user} />
       </PopoverTrigger>
-      <PopoverContent
-        side="right"
-        align="end"
-        sideOffset={10}
-        className="w-52 p-0"
-      >
+      <PopoverContent side="bottom" align="end" className="w-52 p-0">
         <div className="flex flex-col gap-y-1">
           <div className="flex gap-x-2.5 items-center pt-3 px-3">
-            <UserIcon
-              className="w-8 h-8"
-              textClassName="text-md"
-              user={user}
-              clickable={false}
-            />
             <div className="flex flex-col ">
-              <h1 className="text-sm font-semibold max-w-[130px] truncate">
+              <h1 className="text-sm font-semibold max-w-[170px] truncate">
                 {user.name.split(" ")[0]}
               </h1>
               <p
-                className="text-xs text-muted-foreground max-w-[130px] truncate"
+                className="text-xs text-muted-foreground max-w-[170px] truncate"
                 title={user.email}
               >
                 {user.email}
@@ -80,13 +69,10 @@ const UserProfile = ({ user }: UserProfileProps) => {
           <div className="px-2 pb-2.5">
             <div
               onClick={handleSignOut}
-              className="flex items-center cursor-pointer py-1.5 px-2 hover:bg-slate-100 rounded-md transition-all ease-in-out"
+              className="flex items-center cursor-pointer py-1.5 px-2 hover:bg-red-50 rounded-md transition-all ease-in-out"
             >
-              <SignOut
-                weight="bold"
-                className="w-4 h-4 mr-2.5 text-slate-700"
-              />
-              <p className="text-slate-700">Log out</p>
+              <SignOut weight="bold" className="w-4 h-4 mr-2.5 text-red-500" />
+              <p className="text-red-500">Log out</p>
             </div>
           </div>
         </div>

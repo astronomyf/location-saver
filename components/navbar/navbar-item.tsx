@@ -9,7 +9,7 @@ interface SidenavItemProps {
   href: string;
 }
 
-const SidenavItem = ({ href, children }: SidenavItemProps) => {
+const NavbarItem = ({ href, children }: SidenavItemProps) => {
   const segment = useSelectedLayoutSegment();
   const active = href === `/${segment || ""}`;
 
@@ -17,10 +17,8 @@ const SidenavItem = ({ href, children }: SidenavItemProps) => {
     <Link
       href={href}
       className={cn(
-        "w-10 h-10 rounded-md p-2 flex items-center justify-center cursor-pointer hover:transition-all ease-in-out duration-150",
-        active
-          ? "bg-primary-soft text-primary-soft-foreground hover:bg-primary-soft/90"
-          : "text-foreground hover:bg-primary-soft hover:text-primary-soft-foreground"
+        "cursor-pointer hover:transition-all ease-in-out duration-150",
+        active ? "text-primary font-medium" : "text-slate-400 hover:opacity-70"
       )}
     >
       {children}
@@ -28,4 +26,4 @@ const SidenavItem = ({ href, children }: SidenavItemProps) => {
   );
 };
 
-export default SidenavItem;
+export default NavbarItem;

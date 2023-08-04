@@ -16,7 +16,7 @@ import { activeMapStyleAtom, mapStyles } from "./choose-map-style";
 import { useRef } from "react";
 import PointPreview from "./point-preview";
 
-export const enlargeMapAtom = atom<boolean>(true);
+export const enlargeMapAtom = atom<boolean>(false);
 export const markerAtom = atom<MarkerCustomType | null>(null);
 
 const Map = () => {
