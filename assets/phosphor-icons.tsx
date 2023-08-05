@@ -20,4 +20,5 @@ export {
   Mountains,
   Park,
   CaretRight,
+  CaretLeft,
 } from "@phosphor-icons/react";

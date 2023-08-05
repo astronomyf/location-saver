@@ -5,8 +5,14 @@ import {
   VolcanoIcon,
   WaterfallIcon,
 } from "@/assets/categories-icons";
-import { CaretRight, Mountains, Park } from "@/assets/phosphor-icons";
+import {
+  CaretLeft,
+  CaretRight,
+  Mountains,
+  Park,
+} from "@/assets/phosphor-icons";
 import { cn } from "@/lib/utils";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { ScrollContainer } from "react-indiana-drag-scroll";
 import "react-indiana-drag-scroll/dist/style.css";
 
@@ -61,12 +67,45 @@ const mapCategories = [
   },
 ];
 
-// Add lakes, maybe let's take out the desert icon
+// Add lakes, maybe let's take out the desert icon, add transition to chevrons
 
 const Subnavbar = () => {
+  const scrollContainer = useRef<HTMLElement>(null);
+  const [showLeftScroll, setShowLeftScroll] = useState<boolean>(false);
+  const [showRightScroll, setShowRightScroll] = useState<boolean>(true);
+
+  const handleScroll = () => {
+    const distance = scrollContainer?.current?.scrollLeft || 0;
+    const maxDistance =
+      (scrollContainer?.current?.scrollWidth || 0) -
+      (scrollContainer?.current?.clientWidth || 0);
+
+    if (distance >= maxDistance) void setShowRightScroll(false);
+    if (distance < maxDistance) void setShowRightScroll(true);
+
+    setShowLeftScroll(distance > 0);
+  };
+
+  useEffect(() => {
+    if (!scrollContainer?.current) return;
+
+    // Access the scrollable container with scrollContainerRef.current
+    const scrollContainerElement = scrollContainer.current;
+    scrollContainerElement.addEventListener("scroll", handleScroll);
+
+    return () => {
+      // Remove the event listener when the component unmounts
+      scrollContainerElement.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="w-full h-fit relative">
-      <ScrollContainer className="flex w-full border-b border-slate-200 py-2.5 px-6 shadow-sm gap-x-3 overflow-y-hidden pr-24">
+    <div className="w-full h-fit relative border-b border-slate-200">
+      <ScrollContainer
+        // @ts-ignore
+        ref={scrollContainer}
+        className="flex w-full py-2.5 px-6 shadow-sm gap-x-3 overflow-y-hidden pr-24"
+      >
         {mapCategories.map(({ colors, icon, name }) => (
           <div
             key={name}
@@ -96,11 +135,20 @@ const Subnavbar = () => {
           </div>
         ))}
       </ScrollContainer>
-      <div className="absolute top-0 right-0 w-28 h-full bg-gradient-to-l from-white from-55% flex justify-end pr-6">
-        <button className="rounded-full border-slate-200 hover:shadow-lg flex justify-center items-center border bg-white w-8 h-8 mt-2">
-          <CaretRight weight="bold" className="w-4 h-4" />
-        </button>
-      </div>
+      {showRightScroll && (
+        <div className="absolute top-0 right-0 w-28 h-full bg-gradient-to-l from-white from-55% flex justify-end pr-6">
+          <button className="rounded-full border-slate-200 hover:shadow-lg flex justify-center items-center border bg-white w-8 h-8 mt-2">
+            <CaretRight weight="bold" className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+      {showLeftScroll && (
+        <div className="absolute top-0 left-0 w-28 h-full bg-gradient-to-r from-white from-55% flex justify-start pl-6">
+          <button className="rounded-full border-slate-200 hover:shadow-lg flex justify-center items-center border bg-white w-8 h-8 mt-2">
+            <CaretLeft weight="bold" className="w-4 h-4" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
