@@ -1,22 +1,18 @@
+import { CaretLeft, CaretRight } from "@/assets/phosphor-icons";
+import { cn } from "@/lib/utils";
+import { useEffect, useRef, useState } from "react";
+import { ScrollContainer } from "react-indiana-drag-scroll";
+import "react-indiana-drag-scroll/dist/style.css";
 import {
   BeachIcon,
-  DesertIcon,
   ForestIcon,
+  LakeIcon,
   VolcanoIcon,
   WaterfallIcon,
 } from "@/assets/categories-icons";
-import {
-  CaretLeft,
-  CaretRight,
-  Mountains,
-  Park,
-} from "@/assets/phosphor-icons";
-import { cn } from "@/lib/utils";
-import { ReactNode, useEffect, useRef, useState } from "react";
-import { ScrollContainer } from "react-indiana-drag-scroll";
-import "react-indiana-drag-scroll/dist/style.css";
+import { Mountains, Park } from "@/assets/phosphor-icons";
 
-const mapCategories = [
+export const subnavItems = [
   {
     name: "Mountains",
     icon: <Mountains className="w-5 h-5" />,
@@ -56,8 +52,13 @@ const mapCategories = [
       "bg-red-50 text-red-600 border-red-600/30 hover:bg-red-100 font-medium",
   },
   {
+    name: "Lakes",
+    icon: <LakeIcon className="w-4 h-4 text-blue-600 fill-current" />,
+    colors:
+      "bg-blue-50 text-blue-600 border-blue-600/30 hover:bg-blue-100 font-medium",
+  },
+  {
     name: "Deserts",
-    icon: <DesertIcon className="w-4 h-4" />,
   },
   {
     name: "Islands",
@@ -67,12 +68,12 @@ const mapCategories = [
   },
 ];
 
-// Add lakes, maybe let's take out the desert icon, add transition to chevrons
-
 const Subnavbar = () => {
   const scrollContainer = useRef<HTMLElement>(null);
   const [showLeftScroll, setShowLeftScroll] = useState<boolean>(false);
   const [showRightScroll, setShowRightScroll] = useState<boolean>(true);
+
+  const SCROLL_AMOUNT = 800;
 
   const handleScroll = () => {
     const distance = scrollContainer?.current?.scrollLeft || 0;
@@ -84,6 +85,20 @@ const Subnavbar = () => {
     if (distance < maxDistance) void setShowRightScroll(true);
 
     setShowLeftScroll(distance > 0);
+  };
+
+  const handleRightScroll = () => {
+    scrollContainer.current?.scrollBy({
+      left: SCROLL_AMOUNT,
+      behavior: "smooth",
+    });
+  };
+
+  const handleLeftScroll = () => {
+    scrollContainer.current?.scrollBy({
+      left: -SCROLL_AMOUNT,
+      behavior: "smooth",
+    });
   };
 
   useEffect(() => {
@@ -106,7 +121,7 @@ const Subnavbar = () => {
         ref={scrollContainer}
         className="flex w-full py-2.5 px-6 shadow-sm gap-x-3 overflow-y-hidden pr-24"
       >
-        {mapCategories.map(({ colors, icon, name }) => (
+        {subnavItems.map(({ colors, icon, name }) => (
           <div
             key={name}
             className={cn(
@@ -120,7 +135,7 @@ const Subnavbar = () => {
             </span>
           </div>
         ))}
-        {mapCategories.map(({ colors, icon, name }) => (
+        {subnavItems.map(({ colors, icon, name }) => (
           <div
             key={name}
             className={cn(
@@ -135,20 +150,33 @@ const Subnavbar = () => {
           </div>
         ))}
       </ScrollContainer>
-      {showRightScroll && (
-        <div className="absolute top-0 right-0 w-28 h-full bg-gradient-to-l from-white from-55% flex justify-end pr-6">
-          <button className="rounded-full border-slate-200 hover:shadow-lg flex justify-center items-center border bg-white w-8 h-8 mt-2">
-            <CaretRight weight="bold" className="w-4 h-4" />
-          </button>
-        </div>
-      )}
-      {showLeftScroll && (
-        <div className="absolute top-0 left-0 w-28 h-full bg-gradient-to-r from-white from-55% flex justify-start pl-6">
-          <button className="rounded-full border-slate-200 hover:shadow-lg flex justify-center items-center border bg-white w-8 h-8 mt-2">
-            <CaretLeft weight="bold" className="w-4 h-4" />
-          </button>
-        </div>
-      )}
+      <div
+        className={cn(
+          "absolute top-0 right-0 w-28 h-full bg-gradient-to-l from-white from-55% flex justify-end pr-6 transition-opacity ease-in-out duration-200",
+          showRightScroll ? "visible opacity-100" : "invisible opacity-0"
+        )}
+      >
+        <button
+          onClick={handleRightScroll}
+          className="rounded-full border-slate-200 hover:shadow-lg flex justify-center items-center border bg-white w-8 h-8 mt-2"
+        >
+          <CaretRight weight="bold" className="w-4 h-4" />
+        </button>
+      </div>
+
+      <div
+        className={cn(
+          "absolute top-0 left-0 w-28 h-full bg-gradient-to-r from-white from-55% flex justify-start pl-6 transition-opacity ease-in-out duration-200",
+          showLeftScroll ? "visible opacity-100" : "invisible opacity-0"
+        )}
+      >
+        <button
+          onClick={handleLeftScroll}
+          className="rounded-full border-slate-200 hover:shadow-lg flex justify-center items-center border bg-white w-8 h-8 mt-2"
+        >
+          <CaretLeft weight="bold" className="w-4 h-4" />
+        </button>
+      </div>
     </div>
   );
 };

@@ -15,6 +15,7 @@ export interface InputProps
   icon?: React.ReactNode;
   actions?: InputActions[];
   containerClassName?: string;
+  wrapperClassName?: string;
   error?: boolean | string;
 }
 
@@ -26,6 +27,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       icon,
       actions,
       containerClassName,
+      wrapperClassName,
       error = false,
       ...props
     },
@@ -34,7 +36,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const hasActions = !isEmpty(actions);
 
     return (
-      <div className={cn("w-full", error && "flex flex-col gap-y-1")}>
+      <div
+        className={cn(
+          "w-full",
+          error && "flex flex-col gap-y-1",
+          wrapperClassName
+        )}
+      >
         <div className={cn("flex shadow-sm rounded-md", containerClassName)}>
           <div className="relative w-full flex">
             <input
