@@ -21,4 +21,5 @@ export {
   Park,
   CaretRight,
   CaretLeft,
+  Sparkle,
 } from "@phosphor-icons/react";

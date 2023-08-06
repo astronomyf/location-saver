@@ -15,7 +15,7 @@ export default function MapPage() {
       <div
         className={cn(
           "bg-background flex flex-auto overflow-hidden",
-          enlargeMap ? "w-full" : "w-3/4"
+          enlargeMap ? "w-full" : "w-4/6"
         )}
       >
         <Map />
@@ -23,7 +23,7 @@ export default function MapPage() {
       <div
         className={cn(
           "bg-background p-4 flex flex-auto border-l border-slate-200",
-          enlargeMap ? "hidden" : "w-2/4"
+          enlargeMap ? "hidden" : "w-2/6"
         )}
       >
         <h1 className="text-xl font-semibold">Discover</h1>
