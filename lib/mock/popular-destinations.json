@@ -1,0 +1,486 @@
+[
+  {
+    "location": "The Azores, Portugal",
+    "url": "https://media.cntraveler.com/photos/60595e75c685cfec854722a8/master/w_1600%2Cc_limit/Azores-GettyImages-1183442594.jpg",
+    "feature": {
+      "type": "FeatureCollection",
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "place_id": 307947224,
+            "osm_type": "relation",
+            "osm_id": 1629146,
+            "display_name": "Azores, Portugal",
+            "place_rank": 8,
+            "category": "boundary",
+            "type": "administrative",
+            "importance": 0.6280815785083296,
+            "address": {
+              "archipelago": "Azores",
+              "ISO3166-2-lvl4": "PT-20",
+              "country": "Portugal",
+              "country_code": "pt"
+            }
+          },
+          "bbox": [-31.2756316, 36.9276305, -24.7798488, 39.7272503],
+          "geometry": {
+            "type": "Point",
+            "coordinates": [-25.473137391245295, 37.80855645]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "location": "Mount Kilimanjaro, Tanzania",
+    "url": "https://media.cntraveler.com/photos/60596bca7ef97a43a1af2c99/master/w_1600%2Cc_limit/Kilimanjaro-GettyImages-1249566598.jpg",
+    "feature": {
+      "type": "FeatureCollection",
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "place_id": 309519110,
+            "osm_type": "node",
+            "osm_id": 32059197,
+            "display_name": "Uhuru Peak, Rombo, Kilimanjaro, Northern Zone, Tanzania",
+            "place_rank": 18,
+            "category": "natural",
+            "type": "peak",
+            "importance": 0.5374025205734663,
+            "address": {
+              "natural": "Uhuru Peak",
+              "state_district": "Rombo",
+              "state": "Kilimanjaro",
+              "ISO3166-2-lvl4": "TZ-09",
+              "region": "Northern Zone",
+              "country": "Tanzania",
+              "country_code": "tz"
+            }
+          },
+          "bbox": [37.3539487, -3.0764584, 37.3540487, -3.0763584],
+          "geometry": {
+            "type": "Point",
+            "coordinates": [37.3539987, -3.0764084]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "location": "Wulingyuan Scenic Area, China",
+    "url": "https://media.cntraveler.com/photos/5cb63a5211a45eb1f830373c/master/w_1600%2Cc_limit/Wulingyuan-Scenic-Area-China_GettyImages-159228516.jpg"
+  },
+  {
+    "location": "Arashiyama Bamboo Grove, Japan",
+    "url": "https://media.cntraveler.com/photos/5cb63a091a7e70293bf7094b/master/w_1600%2Cc_limit/Arashiyama-Japan_GettyImages-687644524.jpg"
+  },
+  {
+    "location": "Antarctica",
+    "url": "https://media.cntraveler.com/photos/5cb63a087b743b350a60a8d9/master/w_1600%2Cc_limit/Antarctica-_GettyImages-148815908.jpg"
+  },
+  {
+    "location": "Na Pali Coast, Hawaii",
+    "url": "https://media.cntraveler.com/photos/5cb63a2b1a7e7018aef70957/master/w_1600%2Cc_limit/Na-Pali-Coast_GettyImages-1124504102.jpg"
+  },
+  {
+    "location": "Namib Desert, Namibia",
+    "url": "https://media.cntraveler.com/photos/5cb63a2d7b743ba94b60a8e0/master/w_1600%2Cc_limit/Namib-Desert%2C-Namibia_GettyImages-139814922.jpg",
+    "feature": {
+      "type": "FeatureCollection",
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "place_id": 308902984,
+            "osm_type": "relation",
+            "osm_id": 9630535,
+            "display_name": "Namib, Namibia",
+            "place_rank": 22,
+            "category": "natural",
+            "type": "sand",
+            "importance": 0.49131968971341317,
+            "address": {
+              "natural": "Namib",
+              "country": "Namibia",
+              "country_code": "na"
+            }
+          },
+          "bbox": [14.4330203, -26.7021043, 16.4578628, -22.6815277],
+          "geometry": {
+            "type": "Point",
+            "coordinates": [15.332011761012415, -24.9095034]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "location": "Reynisfjara, Iceland",
+    "url": "https://media.cntraveler.com/photos/60596df48f4452dac88c59fe/master/w_1600%2Cc_limit/Reynisfjara-GettyImages-1004089860.jpg",
+    "feature": {
+      "type": "FeatureCollection",
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "place_id": 309187128,
+            "osm_type": "relation",
+            "osm_id": 13989221,
+            "display_name": "Reynisfjara Beach, Mýrdalshreppur, Southern Region, Iceland",
+            "place_rank": 22,
+            "category": "natural",
+            "type": "beach",
+            "importance": 0.2000099999999999,
+            "address": {
+              "natural": "Reynisfjara Beach",
+              "county": "Mýrdalshreppur",
+              "state_district": "Southern Region",
+              "ISO3166-2-lvl5": "IS-8",
+              "country": "Iceland",
+              "country_code": "is"
+            }
+          },
+          "bbox": [-19.1032237, 63.4010252, -19.0351224, 63.407764],
+          "geometry": {
+            "type": "Point",
+            "coordinates": [-19.058636107516655, 63.4044262]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "location": "Capri, Italy",
+    "url": "https://media.cntraveler.com/photos/5e9929655cd3cb0009ca962f/master/w_1600%2Cc_limit/Capri-Italy-GettyImages-629642461.jpg"
+  },
+  {
+    "location": "Cappadocia, Turkey",
+    "url": "https://media.cntraveler.com/photos/605961ae7b588da524cfef44/master/w_1600%2Cc_limit/Cappadocia-GettyImages-166186583.jpg"
+  },
+  {
+    "location": "Angel Falls, Venezuela",
+    "url": "https://media.cntraveler.com/photos/5cb63a087b743b471660a8da/master/w_1600%2Cc_limit/Angel-Falls-Venezuela_GettyImages-165513023.jpg",
+    "feature": {
+      "type": "FeatureCollection",
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "place_id": 2543944,
+            "osm_type": "node",
+            "osm_id": 366604035,
+            "display_name": "Angel Falls, Parroquia Gran Sabana, Municipio Gran Sabana, Bolivar State, Venezuela",
+            "place_rank": 20,
+            "category": "waterway",
+            "type": "waterfall",
+            "importance": 0.4519920724857354,
+            "address": {
+              "waterway": "Angel Falls",
+              "municipality": "Parroquia Gran Sabana",
+              "county": "Municipio Gran Sabana",
+              "state": "Bolivar State",
+              "ISO3166-2-lvl4": "VE-F",
+              "country": "Venezuela",
+              "country_code": "ve"
+            }
+          },
+          "bbox": [-62.5361956, 5.9686871, -62.5360956, 5.9687871],
+          "geometry": {
+            "type": "Point",
+            "coordinates": [-62.5361456, 5.9687371]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "location": "Galápagos Islands, Ecuador",
+    "url": "https://media.cntraveler.com/photos/5e45b1e6927f820008dcc711/master/w_1600%2Cc_limit/Galapagos%2520GettyImages-470028282.jpg"
+  },
+  {
+    "location": "Cliffs of Moher, Ireland",
+    "url": "https://media.cntraveler.com/photos/5cb63a163bf1dc1649de9aab/master/w_1600%2Cc_limit/Cliffs-of-Moher-Ireland_GettyImages-165186543.jpg"
+  },
+  {
+    "location": "The Great Barrier Reef, Australia",
+    "url": "https://media.cntraveler.com/photos/5e45b1d6a007f90008d5bb0d/master/w_1600%2Cc_limit/Great%2520Barrier%2520Reef%2520GettyImages-157400772.jpg"
+  },
+  {
+    "location": "The Grand Canyon, Arizona",
+    "url": "https://media.cntraveler.com/photos/5cb63a18070025530388fa35/master/w_1600%2Cc_limit/Grand-Canyon-AZ_GettyImages-697996602.jpg"
+  },
+  {
+    "location": "Machu Picchu, Peru",
+    "url": "https://media.cntraveler.com/photos/5cb63a273bf1dc125ade9aaf/master/w_1600%2Cc_limit/Machu-Picchu-Peru_GettyImages-109401484.jpg"
+  },
+  {
+    "location": "Mount Fuji, Japan",
+    "url": "https://media.cntraveler.com/photos/60596b398f4452dac88c59f8/master/w_1600%2Cc_limit/MtFuji-GettyImages-959111140.jpg"
+  },
+  {
+    "location": "The Amazon",
+    "url": "https://media.cntraveler.com/photos/5cf8303b6640e7d3bee1d186/master/w_1600%2Cc_limit/Amazon_manaus_GettyImages-935746242.jpg"
+  },
+  {
+    "location": "Serengeti National Park, Tanzania",
+    "url": "https://media.cntraveler.com/photos/60596ee5f490bda87b43e0ab/master/w_1600%2Cc_limit/Serengeti-GettyImages-155605019.jpg"
+  },
+  {
+    "location": "Salar de Uyuni, Bolivia",
+    "url": "https://media.cntraveler.com/photos/61b9ce334dff55cd8434f7ab/master/w_1600%2Cc_limit/Salar-de-Uyuni-Bolivia-GettyImages-465844068.jpg"
+  },
+  {
+    "location": "Sequoia National Park, California",
+    "url": "https://media.cntraveler.com/photos/5eb4171df52f4c0911cac292/master/w_1600%2Cc_limit/Sequoia-National-Park-GettyImages-131984902.jpg",
+    "feature": {
+      "type": "FeatureCollection",
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "place_id": 363623579,
+            "osm_type": "relation",
+            "osm_id": 175060,
+            "display_name": "Sequoia National Park, Tulare County, California, United States",
+            "place_rank": 30,
+            "category": "leisure",
+            "type": "nature_reserve",
+            "importance": 0.4851982998507139,
+            "address": {
+              "leisure": "Sequoia National Park",
+              "county": "Tulare County",
+              "state": "California",
+              "ISO3166-2-lvl4": "US-CA",
+              "country": "United States",
+              "country_code": "us"
+            }
+          },
+          "bbox": [-118.9195403, 36.2910769, -118.2349488, 36.7006603],
+          "geometry": {
+            "type": "Point",
+            "coordinates": [-118.55991938438643, 36.49584065]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "location": "Torres del Paine National Park, Chile",
+    "url": "https://media.cntraveler.com/photos/60596f6a8f4452dac88c5a00/master/w_1600%2Cc_limit/TorresDelPaine-GettyImages-518041239.jpg"
+  },
+  {
+    "location": "Socotra, Yemen",
+    "url": "https://media.cntraveler.com/photos/5cb63a4c1a7e7050e8f70959/master/w_1600%2Cc_limit/Socotra-Yemen_GettyImages-487703989.jpg"
+  },
+  {
+    "location": "Palawan, Philippines",
+    "url": "https://media.cntraveler.com/photos/628fe0c195fdcf29752f5136/master/w_1600%2Cc_limit/Palawan-GettyImages-985553596.jpg"
+  },
+  {
+    "location": "Victoria Falls, Zambia and Zimbabwe",
+    "url": "https://media.cntraveler.com/photos/5cb63a516b5c4dca7b5ec156/master/w_1600%2Cc_limit/Victoria-Falls-Zambia-Zimbabwe_GettyImages-507449285.jpg"
+  },
+  {
+    "location": "The Lofoten Islands, Norway",
+    "url": "https://media.cntraveler.com/photos/5cfe88223b3fd43b601e4aab/master/w_1600%2Cc_limit/Reine%2C-Lofoten-Islands_GettyImages-668757185.jpg",
+    "feature": {
+      "type": "FeatureCollection",
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "place_id": 308603620,
+            "osm_type": "relation",
+            "osm_id": 7827680,
+            "display_name": "Lofoten, Norway",
+            "place_rank": 22,
+            "category": "place",
+            "type": "archipelago",
+            "importance": 0.5126589314101977,
+            "address": {
+              "place": "Lofoten",
+              "country": "Norway",
+              "country_code": "no"
+            }
+          },
+          "bbox": [12.5595403, 67.6305065, 15.1954418, 68.4765674],
+          "geometry": {
+            "type": "Point",
+            "coordinates": [13.680940656585705, 68.20239194999999]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "location": "Avenue of the Baobabs, Madagascar",
+    "url": "https://media.cntraveler.com/photos/5cb63e5611a45ee15630373e/master/w_1600%2Cc_limit/Baobabs_GettyImages-889836156.jpg"
+  },
+  {
+    "location": "Ha Long Bay, Vietnam",
+    "url": "https://media.cntraveler.com/photos/5c1aa572a546ef283d217353/master/w_1600%2Cc_limit/Halong-Bay_GettyImages-111646837.jpg"
+  },
+  {
+    "location": "Laguna Colorada, Bolivia",
+    "url": "https://media.cntraveler.com/photos/5eb1cde0e053a5e6f0fd0c06/master/w_1600%2Cc_limit/Laguna-Colorada-GettyImages-577296437.jpg"
+  },
+  {
+    "location": "Banff National Park, Canada",
+    "url": "https://media.cntraveler.com/photos/5cb63a0bc131b962ade953ad/master/w_1600%2Cc_limit/Banff-Canada_GettyImages-680900749.jpg",
+    "feature": {
+      "type": "FeatureCollection",
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "place_id": 308510736,
+            "osm_type": "relation",
+            "osm_id": 6365995,
+            "display_name": "Banff National Park, Improvement District No. 9, Alberta, Canada",
+            "place_rank": 30,
+            "category": "leisure",
+            "type": "nature_reserve",
+            "importance": 0.5090502260950653,
+            "address": {
+              "leisure": "Banff National Park",
+              "county": "Improvement District No. 9",
+              "state": "Alberta",
+              "ISO3166-2-lvl4": "CA-AB",
+              "country": "Canada",
+              "country_code": "ca"
+            }
+          },
+          "bbox": [-117.317115, 50.7050607, -115.1649126, 52.2714549],
+          "geometry": {
+            "type": "Point",
+            "coordinates": [-115.93804975198333, 51.4881335]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "location": "Namaqualand, South Africa",
+    "url": "https://media.cntraveler.com/photos/5ea9df9752e4f366e67c3de7/master/w_1600%2Cc_limit/Namaqualand-wildflowers-GettyImages-603902648.jpg"
+  },
+  {
+    "location": "Monteverde Cloud Forest, Costa Rica",
+    "url": "https://media.cntraveler.com/photos/628fd7349febef1a2422785f/master/w_1600%2Cc_limit/Monteverde-Costa-Rica-GettyImages-467010064.jpg"
+  },
+  {
+    "location": "Las Salinas de Torrevieja, Spain",
+    "url": "https://media.cntraveler.com/photos/5c6c74975ac5fd121f4375b0/master/w_1600%2Cc_limit/Pink-saltwater-lagoon-of-Torrevieja_GettyImages-905840860.jpg"
+  },
+  {
+    "location": "Caucasus Mountains, Georgia",
+    "url": "https://media.cntraveler.com/photos/60f0aca7c28e94c67dd51ed4/master/w_1600%2Cc_limit/Georgia-GettyImages-827099710.jpg"
+  },
+  {
+    "location": "Zakynthos, Greece",
+    "url": "https://media.cntraveler.com/photos/5cb63a516b5c4d33c25ec158/master/w_1600%2Cc_limit/Zakynthos-Greece_GettyImages-626977447.jpg"
+  },
+  {
+    "location": "The Dark Hedges, Northern Ireland",
+    "url": "https://media.cntraveler.com/photos/5f39d6e770495fc9c8376008/master/w_1600%2Cc_limit/Dark-Hedges-Ireland-GettyImages-481043113.jpg"
+  },
+  {
+    "location": "Lake Tekapo, New Zealand",
+    "url": "https://media.cntraveler.com/photos/5ea9df8f52e4f366e67c3de5/master/w_1600%2Cc_limit/Lake-Tekapo-lupins-GettyImages-465993201.jpg"
+  },
+  {
+    "location": "Cameron Highlands, Malaysia",
+    "url": "https://media.cntraveler.com/photos/628fd9076224b2663cdfc8d3/master/w_1600%2Cc_limit/Cameron-Highlands-Malaysia-GettyImages-566344877.jpg"
+  },
+  {
+    "location": "Vaadhoo Island, Maldives",
+    "url": "https://media.cntraveler.com/photos/5c5c74f6b122107d7ad1a861/master/w_1600%2Cc_limit/Vaadhoo-Island%2C-Raa-Atoll%2C-Maldives%2C-Indian-Ocean_GettyImages-590485956.jpg"
+  },
+  {
+    "location": "Denali National Park, Alaska",
+    "url": "https://media.cntraveler.com/photos/6059636d8f4452dac88c59f4/master/w_1600%2Cc_limit/Denali-GettyImages-1132999090.jpg"
+  },
+  {
+    "location": "The Dead Sea, Israel and Jordan",
+    "url": "https://media.cntraveler.com/photos/5eb1cdcf645a58cc9d923bcd/master/w_1600%2Cc_limit/Dead-Sea-GettyImages-1134265947.jpg"
+  },
+  {
+    "location": "Plitvice Lakes National Park, Croatia",
+    "url": "https://media.cntraveler.com/photos/628fd5ceeccad063f926fe99/master/w_1600%2Cc_limit/Plitvice-Lakes-Croatia-GettyImages-1080935866.jpg"
+  },
+  {
+    "location": "Finnish Lapland",
+    "url": "https://media.cntraveler.com/photos/5c41fb9b21784e6dc7183cfd/master/w_1600%2Cc_limit/Lapland_Finland_GettyImages-640950904.jpg"
+  },
+  {
+    "location": "Isle of Skye, Scotland",
+    "url": "https://media.cntraveler.com/photos/605967821b01d7e74b70528d/master/w_1600%2Cc_limit/IsleOfSkye-GettyImages-1160979608.jpg"
+  },
+  {
+    "location": "Provence, France",
+    "url": "https://media.cntraveler.com/photos/628fd27cdcb44080082c0efa/master/w_1600%2Cc_limit/Provence-GettyImages-1154953887.jpg"
+  },
+  {
+    "location": "Raja Ampat, Indonesia",
+    "url": "https://media.cntraveler.com/photos/628fd4699febef1a2422785d/master/w_1600%2Cc_limit/raja-ampat.jpg",
+    "feature": {
+      "type": "FeatureCollection",
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "place_id": 309710958,
+            "osm_type": "relation",
+            "osm_id": 14954983,
+            "display_name": "Raja Ampat, Southwest Papua, Indonesia",
+            "place_rank": 12,
+            "category": "boundary",
+            "type": "administrative",
+            "importance": 0.45000999999999997,
+            "address": {
+              "county": "Raja Ampat",
+              "state": "Southwest Papua",
+              "country": "Indonesia",
+              "country_code": "id"
+            }
+          },
+          "bbox": [129.0848423, -2.607637, 131.8137862, 1.2874153],
+          "geometry": {
+            "type": "Point",
+            "coordinates": [130.30344727618905, -0.7125553]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "location": "Wadi Rum, Jordan",
+    "url": "https://media.cntraveler.com/photos/621425794af0e291250aa108/master/w_1600%2Cc_limit/WadiRum-Jordan-GettyImages-1129562822.jpg"
+  },
+  {
+    "location": "Valle de Cocora, Colombia",
+    "url": "https://media.cntraveler.com/photos/628fdc599febef1a24227863/master/w_1600%2Cc_limit/Cocora-GettyImages-511770465.jpg"
+  },
+  {
+    "location": "Trolltunga, Norway",
+    "url": "https://media.cntraveler.com/photos/628fd4f0efcfc365de2c45f2/master/w_1600%2Cc_limit/Trolltunga-GettyImages-177425034.jpg"
+  },
+  {
+    "location": "Rakotzbrücke, Germany",
+    "url": "https://media.cntraveler.com/photos/5eb1ce3b4623d48988c218f6/master/w_1600%2Cc_limit/Rakotzbrucke-GettyImages-538162756.jpg"
+  },
+  {
+    "location": "The Baths, British Virgin Islands",
+    "url": "https://media.cntraveler.com/photos/5f8744ea678c7b66de5124da/master/w_1600%2Cc_limit/Virgin%2520Gorda-GettyImages-472662980.jpg"
+  }
+]

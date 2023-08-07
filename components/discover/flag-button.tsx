@@ -7,7 +7,7 @@ interface FlagButtonProps {
 }
 
 const FlagButton = ({ countryCode, children }: FlagButtonProps) => (
-  <Button variant="outline" size="sm">
+  <Button variant="outline" size="sm" className="group-aria-selected:bg-accent">
     <div className="flex items-center gap-x-2">
       <CircleFlag countryCode={countryCode} className="w-4 h-4" />
       {children}

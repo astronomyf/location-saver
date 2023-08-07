@@ -28,7 +28,10 @@ const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
   return (
     <Dialog {...props}>
       <DialogContent className="overflow-hidden p-0 shadow-lg top-3 translate-y-0 !rounded-xl !border-0">
-        <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+        <Command
+          className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5
+         [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
+        >
           {children}
         </Command>
       </DialogContent>
@@ -61,7 +64,7 @@ const CommandList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.List
     ref={ref}
-    className={cn("max-h-[300px] overflow-y-auto overflow-x-hidden", className)}
+    className={cn("max-h-[400px] overflow-y-auto overflow-x-hidden", className)}
     {...props}
   />
 ));
@@ -111,14 +114,17 @@ CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
 
 const CommandItem = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item> & {
+    unstyled?: boolean;
+  }
+>(({ unstyled = false, className, style, ...props }, ref) => (
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-md px-3 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-pointer select-none items-center group rounded-md px-3 py-1.5 text-sm outline-none aria-selected:bg-slate-50 aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className
     )}
+    style={{ ...style, ...(unstyled ? { all: "unset" } : {}) }}
     {...props}
   />
 ));
@@ -141,6 +147,21 @@ const CommandShortcut = ({
 };
 CommandShortcut.displayName = "CommandShortcut";
 
+const CommandFooter = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => {
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-end w-full px-4 py-2 border-t border-slate-200 mt-2",
+        className
+      )}
+      {...props}
+    />
+  );
+};
+
 export {
   Command,
   CommandDialog,
@@ -151,4 +172,5 @@ export {
   CommandItem,
   CommandShortcut,
   CommandSeparator,
+  CommandFooter,
 };
