@@ -2,10 +2,15 @@ import { User } from "@/types/firestore/user";
 import UserIcon from "./user-icon";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import Divider from "../ui/divider";
-import { CreditCard, Gear, MapTrifold, SignOut } from "@/assets/phosphor-icons";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase/config";
 import { useRouter } from "next/navigation";
+import {
+  IconCreditCard,
+  IconLogout2,
+  IconMap,
+  IconSettings,
+} from "@tabler/icons-react";
 
 interface UserProfileProps {
   user: User;
@@ -44,24 +49,18 @@ const UserProfile = ({ user }: UserProfileProps) => {
               </p>
             </div>
           </div>
-          <Divider className="my-2" />
+          <Divider className="my-1" />
           <div className="flex flex-col gap-y-1.5 px-2">
             <li className="flex items-center cursor-pointer py-1.5 px-2 hover:bg-slate-100 rounded-md transition-colors ease-in-out">
-              <MapTrifold
-                weight="bold"
-                className="w-4 h-4 mr-2.5 text-slate-700"
-              />
+              <IconMap size={18} className="mr-2.5 text-slate-700" />
               <p className="text-slate-700">Map settings</p>
             </li>
             <li className="flex items-center cursor-pointer py-1.5 px-2 hover:bg-slate-100 rounded-md transition-all ease-in-out">
-              <Gear weight="bold" className="w-4 h-4 mr-2.5 text-slate-700" />
+              <IconSettings size={18} className="mr-2.5 text-slate-700" />
               <p className="text-slate-700">Profile settings</p>
             </li>
             <li className="flex items-center cursor-pointer py-1.5 px-2 hover:bg-slate-100 rounded-md transition-all ease-in-out">
-              <CreditCard
-                weight="bold"
-                className="w-4 h-4 mr-2.5 text-slate-700"
-              />
+              <IconCreditCard size={18} className="mr-2.5 text-slate-700" />
               <p className="text-slate-700">Subscription</p>{" "}
             </li>
           </div>
@@ -71,7 +70,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
               onClick={handleSignOut}
               className="flex items-center cursor-pointer py-1.5 px-2 hover:bg-red-50 rounded-md transition-all ease-in-out"
             >
-              <SignOut weight="bold" className="w-4 h-4 mr-2.5 text-red-500" />
+              <IconLogout2 size={18} className="mr-2.5 text-red-500" />
               <p className="text-red-500">Log out</p>
             </div>
           </div>

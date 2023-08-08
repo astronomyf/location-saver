@@ -1,11 +1,3 @@
-import {
-  Binoculars,
-  CircleNotch,
-  MagnifyingGlass,
-  MapPin,
-  Plus,
-  X,
-} from "@/assets/phosphor-icons";
 import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
 import { useDebounce } from "usehooks-ts";
@@ -15,7 +7,8 @@ import Suggestions from "./suggestions";
 import { isEmpty } from "lodash";
 import { markersAtom } from ".";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import Loader from "../ui/loading";
+import { IconMapPlus, IconPin, IconSearch, IconX } from "@tabler/icons-react";
 
 export const searchOpenAtom = atom<boolean>(false);
 export const searchQueryAtom = atom<string>("");
@@ -81,14 +74,14 @@ const MapActions = () => {
         placeholder="Search for a location"
         icon={
           loading ? (
-            <CircleNotch className="w-5 h-5 animate-spin" />
+            <Loader className="!fill-current" />
           ) : searchQuery ? (
-            <X
+            <IconX
               className="w-5 h-5 hover:opacity-50 cursor-pointer"
               onClick={resetSearch}
             />
           ) : (
-            <MagnifyingGlass className="w-5 h-5" />
+            <IconSearch size={20} />
           )
         }
         onFocus={() => setSearchOpen(true)}
@@ -104,21 +97,14 @@ const MapActions = () => {
           {
             icon: (
               <div className="relative">
-                <MapPin weight="fill" className="w-5 h-5" />
-                <div
-                  className={
-                    "absolute bottom-0 left-3 text-primary w-2.5 h-2.5 rounded-full flex justify-center items-center bg-white"
-                  }
-                >
-                  <Plus weight="bold" className={"w-2 h-2 text-primary"} />
-                </div>
+                <IconPin size={20} />
               </div>
             ),
             tooltipText: "Add a new location",
             onClick: () => setAddPointMode(true),
           },
           {
-            icon: <Binoculars weight="fill" className="w-5 h-5" />,
+            icon: <IconMapPlus size={20} />,
             tooltipText: "Add explorer's levels",
             className: cn(hasSuggestions && "!rounded-b-none"),
           },

@@ -8,11 +8,11 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import ButtonMap from "./button-map";
-import { Stack } from "@/assets/phosphor-icons";
 import Image from "next/image";
 import { MapStyleObject, MapStyles } from "@/types/map/generic";
 import { entries } from "lodash";
 import { cn } from "@/lib/utils";
+import { IconStack2 } from "@tabler/icons-react";
 
 export const activeMapStyleAtom = atom<MapStyles>("outdoor");
 
@@ -38,7 +38,7 @@ const ChooseMapStyle = () => {
     <Dialog>
       <DialogTrigger asChild>
         <ButtonMap>
-          <Stack className="w-4 h-4" />
+          <IconStack2 stroke={1.5} size={20} />
         </ButtonMap>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

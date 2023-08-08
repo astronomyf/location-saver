@@ -3,7 +3,8 @@ import { MarkerCustomType } from "@/types/map/marker";
 import { useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 
-export const useLoadInitialMarkers = () => {
+export const useLoadInitialMarkers = (allowSetMarkers = true) => {
+  const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const setMarkers = useSetAtom(markersAtom);
 
@@ -29,7 +30,8 @@ export const useLoadInitialMarkers = () => {
             }))
           );
 
-        setMarkers(filtered);
+        setData(data);
+        allowSetMarkers && setMarkers(filtered);
       } catch (err) {
         console.error(err);
       } finally {
@@ -40,5 +42,5 @@ export const useLoadInitialMarkers = () => {
     loadInitialMarkers();
   }, []);
 
-  return loading;
+  return { data, loading };
 };

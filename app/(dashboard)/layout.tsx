@@ -1,8 +1,8 @@
 "use client";
 
-import { CircleNotch } from "@/assets/phosphor-icons";
 import Navbar from "@/components/navbar/navbar";
 import Subnavbar from "@/components/navbar/subnavbar";
+import Loader from "@/components/ui/loading";
 import { useAuthState } from "@/lib/hooks/firebase/useAuthState";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -26,7 +26,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   if (loading || !user)
     return (
       <div className="min-h-screen w-full flex justify-center items-center">
-        <CircleNotch className="w-10 h-10 animate-spin text-primary" />
+        <Loader size="lg" />
       </div>
     );
 

@@ -18,7 +18,7 @@ import { activeMapStyleAtom, mapStyles } from "./choose-map-style";
 import { useRef } from "react";
 import PointPreview from "./point-preview";
 import { useLoadInitialMarkers } from "@/lib/hooks/map/useLoadInitialMarkers";
-import { CircleNotch } from "@/assets/phosphor-icons";
+import Loader from "../ui/loading";
 
 export const enlargeMapAtom = atom<boolean>(false);
 export const markersAtom = atom<MarkerCustomType[]>([]);
@@ -30,9 +30,7 @@ const Map = () => {
   const activeMapStyle = useAtomValue(activeMapStyleAtom);
   const [addPointMode, setAddPointMode] = useAtom(addPointModeAtom);
 
-  const markersLoading = useLoadInitialMarkers();
-
-  console.log("markers", markers);
+  const { loading: markersLoading } = useLoadInitialMarkers();
 
   const handleOnMapClick = (event: MapLayerMouseEvent) => {
     if (!addPointMode) return;
@@ -47,12 +45,12 @@ const Map = () => {
   if (markersLoading)
     return (
       <div className="h-full w-full flex justify-center items-center">
-        <CircleNotch className="w-10 h-10 animate-spin text-primary" />
+        <Loader size="lg" />
       </div>
     );
 
   return (
-    <div className="flex flex-1 relative">
+    <div className="flex flex-1 relative overflow-hidden">
       <MapProvider>
         <MapView
           id="map"
@@ -93,12 +91,12 @@ const Map = () => {
         <div className="absolute top-4 right-4">
           <MapControls />
         </div>
-        <div className="absolute top-4 left-4">
+        {/* <div className="absolute top-4 left-4">
           <div className="flex flex-1 flex-col gap-y-2">
             <MapActions />
-            {/* <PointPreview mapInstance={mapRef.current} /> */}
+            <PointPreview mapInstance={mapRef.current} />
           </div>
-        </div>
+        </div> */}
       </MapProvider>
     </div>
   );

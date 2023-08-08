@@ -4,7 +4,7 @@ import { MapInstance } from "@/types/map/generic";
 import { useSearchPlaceCoords } from "@/lib/hooks/queries/useSearchPlaceCoords";
 import { getLocationProperties } from "@/lib/getLocationProperties";
 import { Button } from "../ui/button";
-import { Plus } from "@/assets/phosphor-icons";
+import { IconPlus } from "@tabler/icons-react";
 
 interface PointPreviewProps {
   mapInstance?: MapInstance | null;
@@ -45,7 +45,7 @@ const PointPreview = ({ mapInstance }: PointPreviewProps) => {
       {!isLoading && (
         <div className="grid grid-cols-2 gap-x-2 border-t border-slate-200 p-4">
           <Button>
-            <Plus className="w-4 h-4 mr-2" />
+            <IconPlus size={16} stroke={1.5} className="mr-2" />
             Create
           </Button>
           <Button variant="secondary">Clear</Button>

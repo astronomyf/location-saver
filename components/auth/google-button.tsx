@@ -1,5 +1,5 @@
-import { CircleNotch } from "@/assets/phosphor-icons";
 import { Button } from "../ui/button";
+import Loader from "../ui/loading";
 
 interface GoogleButtonProps {
   label: string;
@@ -16,7 +16,7 @@ const GoogleButton = ({
 }: GoogleButtonProps) => (
   <Button variant="outline" className={className} onClick={onClick}>
     {loading ? (
-      <CircleNotch className="w-5 h-5 animate-spin mr-2 text-slate-300" />
+      <Loader className="mr-2 !text-slate-300" />
     ) : (
       <svg
         className="w-4 h-auto mr-2"

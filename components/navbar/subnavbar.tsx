@@ -1,12 +1,6 @@
 import { CaretLeft, CaretRight } from "@/assets/phosphor-icons";
 import { cn } from "@/lib/utils";
-import {
-  ComponentPropsWithRef,
-  MutableRefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ComponentPropsWithRef, useEffect, useRef, useState } from "react";
 import { ScrollContainer } from "react-indiana-drag-scroll";
 import "react-indiana-drag-scroll/dist/style.css";
 import {
@@ -16,14 +10,13 @@ import {
   VolcanoIcon,
   WaterfallIcon,
 } from "@/assets/categories-icons";
-import { Mountains, Park } from "@/assets/phosphor-icons";
-import { ScrollContainerDefaultProps } from "react-indiana-drag-scroll/dist/types";
-import { ScopedEmitHelper } from "typescript";
+import { Park } from "@/assets/phosphor-icons";
+import { IconMountain } from "@tabler/icons-react";
 
 export const subnavItems = [
   {
     name: "Mountains",
-    icon: <Mountains className="w-5 h-5" />,
+    icon: <IconMountain size={20} stroke={1.7} />,
     colors:
       "bg-yellow-800/10 text-yellow-800 border-yellow-800/30 hover:bg-yellow-800/20 font-medium",
   },

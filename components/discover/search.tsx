@@ -1,9 +1,4 @@
-import {
-  MagnifyingGlass,
-  MapPin,
-  Mountains,
-  Park,
-} from "@/assets/phosphor-icons";
+import { MapPin, Mountains, Park } from "@/assets/phosphor-icons";
 import Kbd from "../ui/keyboard";
 import { isMacOS } from "@/lib/utils";
 import { useEffect, useState } from "react";
@@ -20,6 +15,7 @@ import { Button } from "../ui/button";
 import FlagButton from "./flag-button";
 import SearchListItem from "./search-list-item";
 import { WaterfallIcon } from "@/assets/categories-icons";
+import { IconSearch } from "@tabler/icons-react";
 
 const Search = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -43,7 +39,7 @@ const Search = () => {
         className="w-full px-4 py-2 rounded-full select-none cursor-pointer bg-white border border-slate-200 hover:shadow-sm relative flex items-center"
       >
         <div className="absolute inset-y-0 left-0 flex items-center pl-4">
-          <MagnifyingGlass className="w-5 h-5" />
+          <IconSearch stroke={1.7} className="w-5 h-5" />
         </div>
         <span className="text-slate-400 pl-8 pr-4">
           Search country, location or landmark
