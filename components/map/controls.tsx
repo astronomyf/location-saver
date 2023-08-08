@@ -1,5 +1,5 @@
 import { Minus, Plus, Stack } from "@/assets/phosphor-icons";
-import { useMapZoomDisabled } from "@/lib/hooks/useMapZoomDisabled";
+import { useMapZoomDisabled } from "@/lib/hooks/map/useMapZoomDisabled";
 import { useMap } from "react-map-gl/maplibre";
 import ButtonMap from "./button-map";
 import ChooseMapStyle from "./choose-map-style";

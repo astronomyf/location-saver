@@ -1,6 +1,12 @@
 import { CaretLeft, CaretRight } from "@/assets/phosphor-icons";
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
+import {
+  ComponentPropsWithRef,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { ScrollContainer } from "react-indiana-drag-scroll";
 import "react-indiana-drag-scroll/dist/style.css";
 import {
@@ -11,6 +17,8 @@ import {
   WaterfallIcon,
 } from "@/assets/categories-icons";
 import { Mountains, Park } from "@/assets/phosphor-icons";
+import { ScrollContainerDefaultProps } from "react-indiana-drag-scroll/dist/types";
+import { ScopedEmitHelper } from "typescript";
 
 export const subnavItems = [
   {
@@ -68,6 +76,8 @@ export const subnavItems = [
   },
 ];
 
+type ScrollContainerRef = ComponentPropsWithRef<typeof ScrollContainer>["ref"];
+
 const Subnavbar = () => {
   const scrollContainer = useRef<HTMLElement>(null);
   const [showLeftScroll, setShowLeftScroll] = useState<boolean>(false);
@@ -117,8 +127,7 @@ const Subnavbar = () => {
   return (
     <div className="w-full h-fit relative border-b border-slate-200">
       <ScrollContainer
-        // @ts-ignore
-        ref={scrollContainer}
+        ref={scrollContainer as ScrollContainerRef}
         className="flex w-full py-2.5 px-6 shadow-sm gap-x-3 overflow-y-hidden pr-24"
       >
         {subnavItems.map(({ colors, icon, name }) => (

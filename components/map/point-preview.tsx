@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { markerAtom } from ".";
+import { markersAtom } from ".";
 import { MapInstance } from "@/types/map/generic";
 import { useSearchPlaceCoords } from "@/lib/hooks/queries/useSearchPlaceCoords";
 import { getLocationProperties } from "@/lib/getLocationProperties";
@@ -11,15 +11,15 @@ interface PointPreviewProps {
 }
 
 const PointPreview = ({ mapInstance }: PointPreviewProps) => {
-  const marker = useAtomValue(markerAtom);
-  const { latitude, longitude } = marker || {};
+  const markers = useAtomValue(markersAtom);
+  const { latitude, longitude } = markers[0];
 
   const { data, isLoading, status } = useSearchPlaceCoords(longitude, latitude);
   const features = status === "success" ? data.features : [];
 
   const location = getLocationProperties(features);
 
-  if (!mapInstance || !marker) return null;
+  if (!mapInstance || !markers) return null;
 
   return (
     <div className="flex flex-1 flex-wrap bg-background rounded-md shadow-md border border-slate-200 flex-col">

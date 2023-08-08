@@ -4,7 +4,7 @@ import { LngLat, QueryPlacesFeature } from "@/types/map/places-query";
 import { MapPin } from "@/assets/phosphor-icons";
 import { splitAddressName } from "@/lib/splitAddressName";
 import { useMap } from "react-map-gl/maplibre";
-import { markerAtom } from ".";
+import { markersAtom } from ".";
 
 interface SuggestionsProps {
   data: QueryPlacesFeature[];
@@ -14,7 +14,7 @@ interface SuggestionsProps {
 const Suggestions = ({ data, hidden = false }: SuggestionsProps) => {
   const setSearchOpen = useSetAtom(searchOpenAtom);
   const setSearchQuery = useSetAtom(searchQueryAtom);
-  const setMarker = useSetAtom(markerAtom);
+  const setMarkers = useSetAtom(markersAtom);
 
   const { map } = useMap();
 
@@ -48,10 +48,12 @@ const Suggestions = ({ data, hidden = false }: SuggestionsProps) => {
                 center: coords,
               });
 
-              setMarker({
-                latitude: coords[1],
-                longitude: coords[0],
-              });
+              setMarkers([
+                {
+                  latitude: coords[1],
+                  longitude: coords[0],
+                },
+              ]);
             }}
           >
             <MapPin className="!w-4 !h-4 text-slate-400" weight="fill" />

@@ -15,97 +15,41 @@ import MapActions, { addPointModeAtom } from "./actions";
 import MarkerCustom from "./marker";
 import { MarkerCustomType } from "@/types/map/marker";
 import { activeMapStyleAtom, mapStyles } from "./choose-map-style";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import PointPreview from "./point-preview";
+import { useLoadInitialMarkers } from "@/lib/hooks/map/useLoadInitialMarkers";
+import { CircleNotch } from "@/assets/phosphor-icons";
 
 export const enlargeMapAtom = atom<boolean>(false);
-export const markerAtom = atom<MarkerCustomType | null>(null);
+export const markersAtom = atom<MarkerCustomType[]>([]);
 
 const Map = () => {
   const mapRef = useRef<MapRef | null>(null);
 
-  const [marker, setMarker] = useAtom(markerAtom);
+  const [markers, setMarkers] = useAtom(markersAtom);
   const activeMapStyle = useAtomValue(activeMapStyleAtom);
   const [addPointMode, setAddPointMode] = useAtom(addPointModeAtom);
 
-  const [data, setData] = useState<any>(null);
+  const markersLoading = useLoadInitialMarkers();
+
+  console.log("markers", markers);
 
   const handleOnMapClick = (event: MapLayerMouseEvent) => {
     if (!addPointMode) return;
 
     const { lngLat } = event;
 
-    setMarker({ latitude: lngLat.lat, longitude: lngLat.lng });
+    setMarkers([{ latitude: lngLat.lat, longitude: lngLat.lng }]);
     mapRef.current?.flyTo({ center: [lngLat.lng, lngLat.lat] });
     setAddPointMode(false);
   };
 
-  useEffect(() => {
-    // fetch("../lib/mock/popular-destinations.json")
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     const filtered = data
-    //       .filter((d: any) => !!d?.feature)
-    //       .map((d: any) => d.feature);
-    //     setData(filtered);
-    //   });
-    const data: any[] = [
-      {
-        type: "Feature",
-        properties: {
-          place_id: 307947224,
-          osm_type: "relation",
-          osm_id: 1629146,
-          display_name: "Azores, Portugal",
-          place_rank: 8,
-          category: "boundary",
-          type: "administrative",
-          importance: 0.6280815785083296,
-          address: {
-            archipelago: "Azores",
-            "ISO3166-2-lvl4": "PT-20",
-            country: "Portugal",
-            country_code: "pt",
-          },
-        },
-        bbox: [-31.2756316, 36.9276305, -24.7798488, 39.7272503],
-        geometry: {
-          type: "Point",
-          coordinates: [-25.473137391245295, 37.80855645],
-        },
-      },
-      {
-        type: "Feature",
-        properties: {
-          place_id: 309519110,
-          osm_type: "node",
-          osm_id: 32059197,
-          display_name:
-            "Uhuru Peak, Rombo, Kilimanjaro, Northern Zone, Tanzania",
-          place_rank: 18,
-          category: "natural",
-          type: "peak",
-          importance: 0.5374025205734663,
-          address: {
-            natural: "Uhuru Peak",
-            state_district: "Rombo",
-            state: "Kilimanjaro",
-            "ISO3166-2-lvl4": "TZ-09",
-            region: "Northern Zone",
-            country: "Tanzania",
-            country_code: "tz",
-          },
-        },
-        bbox: [37.3539487, -3.0764584, 37.3540487, -3.0763584],
-        geometry: {
-          type: "Point",
-          coordinates: [37.3539987, -3.0764084],
-        },
-      },
-    ];
-
-    setData({ type: "FeatureCollection", features: data });
-  }, []);
+  if (markersLoading)
+    return (
+      <div className="h-full w-full flex justify-center items-center">
+        <CircleNotch className="w-10 h-10 animate-spin text-primary" />
+      </div>
+    );
 
   return (
     <div className="flex flex-1 relative">
@@ -114,21 +58,24 @@ const Map = () => {
           id="map"
           ref={mapRef}
           initialViewState={{
-            longitude: 146.6639,
-            latitude: -42.6685,
-            zoom: 1,
+            longitude: 0,
+            latitude: 0,
+            zoom: 0,
           }}
           mapStyle={mapStyles[activeMapStyle].url}
           style={{ flex: 1 }}
           cursor={addPointMode ? "crosshair" : undefined}
           onClick={handleOnMapClick}
         >
-          {marker && (
-            <Marker latitude={marker.latitude} longitude={marker.longitude}>
-              <MarkerCustom />
+          {markers.map(({ latitude, longitude, title, imageUrl }, i) => (
+            <Marker key={i} latitude={latitude} longitude={longitude}>
+              <MarkerCustom
+                title={title || "Example"}
+                imageUrl={imageUrl || ""}
+              />
             </Marker>
-          )}
-          <Source type="geojson" data={data}>
+          ))}
+          {/* <Source type="geojson" data={data}>
             <Layer
               {...{
                 id: "point",
@@ -141,7 +88,7 @@ const Map = () => {
                 },
               }}
             />
-          </Source>
+          </Source> */}
         </MapView>
         <div className="absolute top-4 right-4">
           <MapControls />
@@ -149,7 +96,7 @@ const Map = () => {
         <div className="absolute top-4 left-4">
           <div className="flex flex-1 flex-col gap-y-2">
             <MapActions />
-            <PointPreview mapInstance={mapRef.current} />
+            {/* <PointPreview mapInstance={mapRef.current} /> */}
           </div>
         </div>
       </MapProvider>

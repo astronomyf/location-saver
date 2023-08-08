@@ -13,7 +13,7 @@ import { useSearchPlaceQuery } from "@/lib/hooks/queries/useSearchPlaceQuery";
 import { atom, useAtom, useSetAtom } from "jotai";
 import Suggestions from "./suggestions";
 import { isEmpty } from "lodash";
-import { markerAtom } from ".";
+import { markersAtom } from ".";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 
@@ -25,7 +25,7 @@ const MapActions = () => {
   const [searchOpen, setSearchOpen] = useAtom(searchOpenAtom);
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
 
-  const setMarker = useSetAtom(markerAtom);
+  const setMarkers = useSetAtom(markersAtom);
   const setAddPointMode = useSetAtom(addPointModeAtom);
 
   const queryClient = useQueryClient();
@@ -55,7 +55,7 @@ const MapActions = () => {
   };
 
   const resetSearch = () => {
-    setMarker(null);
+    setMarkers([]);
     setSearchOpen(false);
     searchQuery && setSearchQuery("");
 
@@ -63,11 +63,11 @@ const MapActions = () => {
     queryClient.setQueryData(["searchPlace"], { features: [] });
   };
 
-  useEffect(() => {
-    if (searchQuery) return;
+  // useEffect(() => {
+  //   if (searchQuery) return;
 
-    resetSearch();
-  }, [searchQuery]);
+  //   resetSearch();
+  // }, [searchQuery]);
 
   return (
     <div
