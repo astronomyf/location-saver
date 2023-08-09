@@ -13,7 +13,7 @@ export default function MapPage() {
       <div
         className={cn(
           "bg-background flex flex-auto overflow-hidden",
-          enlargeMap ? "w-full" : "w-3/4"
+          enlargeMap ? "w-full" : "w-4/6"
         )}
       >
         <Map />
@@ -22,7 +22,7 @@ export default function MapPage() {
         id="map-container"
         className={cn(
           "bg-background p-4 flex flex-auto border-l h-full max-h-[calc(100vh-121px)] overflow-y-scroll border-slate-200 relative z-50 shadow-[-14px_0px_15px_-16px_rgba(0,0,0,0.1)]",
-          enlargeMap ? "hidden" : "w-2/4"
+          enlargeMap ? "hidden" : "w-2/6"
         )}
       >
         <LocationDetails />

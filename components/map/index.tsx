@@ -68,6 +68,7 @@ const Map = () => {
           {markers.map(({ latitude, longitude, title, imageUrl }, i) => (
             <Marker key={i} latitude={latitude} longitude={longitude}>
               <MarkerCustom
+                locationId={title || "example"}
                 title={title || "Example"}
                 imageUrl={imageUrl || ""}
               />

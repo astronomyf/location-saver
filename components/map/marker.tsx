@@ -4,28 +4,46 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { IconBookmark, IconX } from "@tabler/icons-react";
 import { PopoverClose } from "@radix-ui/react-popover";
+import { atom, useAtomValue } from "jotai";
+import { cn } from "@/lib/utils";
 
 interface MarkerCustomProps {
+  locationId: string;
   title: string;
   description?: string;
   imageUrl: string;
 }
 
+export const highlightMarkerAtom = atom<string | null>(null);
+
 const MarkerCustom = ({
   title,
   description = "A location in the world.",
   imageUrl,
+  locationId,
 }: MarkerCustomProps) => {
   const container = document.getElementById("map");
+
+  const highlightMarker = useAtomValue(highlightMarkerAtom);
+  const isSelected = highlightMarker === locationId;
+
   if (!container) return null;
 
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <div className="group w-6 h-6 border border-slate-200 rounded-full bg-white cursor-pointer aria-expanded:border-white aria-expanded:scale-110 aria-expanded:bg-primary hover:scale-110 transition-transform ease-in-out flex items-center justify-center p-1 shadow-md">
+        <div
+          className={cn(
+            "group w-6 h-6 border border-slate-200 rounded-full bg-white cursor-pointer aria-expanded:border-white aria-expanded:scale-110 aria-expanded:bg-primary hover:scale-110 transition-transform ease-in-out flex items-center justify-center p-1 shadow-md",
+            isSelected && "border-white scale-110 bg-primary"
+          )}
+        >
           <MapPin
             weight="fill"
-            className="w-4 h-4 text-primary group-aria-expanded:text-white"
+            className={cn(
+              "w-4 h-4 text-primary group-aria-expanded:text-white",
+              isSelected && "text-white"
+            )}
           />
         </div>
       </PopoverTrigger>
@@ -50,8 +68,8 @@ const MarkerCustom = ({
         </div>
         <div className="absolute top-2 right-2">
           <PopoverClose asChild>
-            <div className="rounded-full bg-white border border-slate-200 flex justify-center items-center w-6 h-6 shadow-sm cursor-pointer">
-              <IconX size={16} />
+            <div className="rounded-full bg-black/50 backdrop-blur-sm flex justify-center items-center w-6 h-6 hover:shadow-sm cursor-pointer">
+              <IconX size={16} className="text-white" />
             </div>
           </PopoverClose>
         </div>
