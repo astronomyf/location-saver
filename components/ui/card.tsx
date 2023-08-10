@@ -24,7 +24,7 @@ const Card = ({
   return (
     <div
       className={cn(
-        "w-full h-24 flex group rounded-md border border-slate-200 hover:shadow-sm cursor-pointer relative",
+        "w-full h-24 bg-white flex group rounded-md border-slate-200 shadow-md cursor-pointer relative",
         className
       )}
       onClick={onClick}
@@ -34,12 +34,12 @@ const Card = ({
       <div className="absolute top-2 right-3">
         <IconHeart size={20} />
       </div>
-      <div className="w-36 h-full relative overflow-hidden rounded-l-md">
+      <div className="w-40 h-full relative overflow-hidden rounded-lg border-4 border-white">
         {imageUrl ? (
           <Image
             src={imageUrl}
             alt={title}
-            className="object-cover object-center rounded-l-md w-full group-hover:scale-110 transition-transform ease-in-out"
+            className="object-cover object-center w-full group-hover:scale-110 transition-transform ease-in-out"
             fill
           />
         ) : (
@@ -48,9 +48,9 @@ const Card = ({
           </div>
         )}
       </div>
-      <div className="w-full h-fit flex flex-col py-2 px-4">
-        <h1 className="font-medium">{title}</h1>
-        {description && <p className="text-sm text-slate-400">{description}</p>}
+      <div className="w-full h-fit flex flex-col py-2 px-4 pr-8">
+        <h1 className="font-medium text-sm">{title}</h1>
+        {description && <p className="text-xs text-slate-400">{description}</p>}
       </div>
     </div>
   );
