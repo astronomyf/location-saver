@@ -48,8 +48,8 @@ const Card = ({
           </div>
         )}
       </div>
-      <div className="w-full h-fit flex flex-col py-2 px-4 pr-8">
-        <h1 className="font-medium text-sm">{title}</h1>
+      <div className="w-full h-fit flex flex-col py-2 px-1 pr-8">
+        <h1 className="font-medium text-sm whitespace-nowrap">{title}</h1>
         {description && <p className="text-xs text-slate-400">{description}</p>}
       </div>
     </div>

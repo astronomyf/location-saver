@@ -12,6 +12,9 @@ import {
 } from "@/assets/categories-icons";
 import { Park } from "@/assets/phosphor-icons";
 import { IconMountain } from "@tabler/icons-react";
+import { Transition } from "@headlessui/react";
+import { useAtomValue } from "jotai";
+import { detailOpenAtom } from "../discover/details";
 
 export const subnavItems = [
   {
@@ -76,6 +79,8 @@ const Subnavbar = () => {
   const [showLeftScroll, setShowLeftScroll] = useState<boolean>(false);
   const [showRightScroll, setShowRightScroll] = useState<boolean>(true);
 
+  const detailOpen = useAtomValue(detailOpenAtom);
+
   const SCROLL_AMOUNT = 800;
 
   const handleScroll = () => {
@@ -118,68 +123,79 @@ const Subnavbar = () => {
   }, []);
 
   return (
-    <div className="w-full h-fit relative border-b border-slate-200">
-      <ScrollContainer
-        ref={scrollContainer as ScrollContainerRef}
-        className="flex w-full py-2.5 px-6 shadow-sm gap-x-3 overflow-y-hidden pr-24"
-      >
-        {subnavItems.map(({ colors, icon, name }) => (
-          <div
-            key={name}
-            className={cn(
-              "flex items-center justify-center py-0.5 px-2 cursor-pointer rounded-full border-[1.5px] ",
-              colors ? colors : "text-gray-800 hover:bg-slate-100"
-            )}
-          >
-            {icon}
-            <span className={cn("text-sm whitespace-nowrap", icon && "ml-2")}>
-              {name}
-            </span>
-          </div>
-        ))}
-        {subnavItems.map(({ colors, icon, name }) => (
-          <div
-            key={name}
-            className={cn(
-              "flex items-center justify-center py-0.5 px-2 cursor-pointer rounded-full border-[1.5px] ",
-              colors ? colors : "text-gray-800 hover:bg-slate-100"
-            )}
-          >
-            {icon}
-            <span className={cn("text-sm whitespace-nowrap", icon && "ml-2")}>
-              {name}
-            </span>
-          </div>
-        ))}
-      </ScrollContainer>
-      <div
-        className={cn(
-          "absolute top-0 right-0 w-28 h-full bg-gradient-to-l from-white from-55% flex justify-end pr-6 transition-opacity ease-in-out duration-200",
-          showRightScroll ? "visible opacity-100" : "invisible opacity-0"
-        )}
-      >
-        <button
-          onClick={handleRightScroll}
-          className="rounded-full border-slate-200 hover:shadow-lg flex justify-center items-center border bg-white w-8 h-8 mt-2"
+    <Transition
+      show={!detailOpen}
+      enter="transform transition-all duration-300"
+      enterFrom="-translate-y-full opacity-0"
+      enterTo="translate-y-0 opacity-100"
+      leave="transform transition-all duration-300"
+      leaveFrom="translate-y-0 opacity-100"
+      leaveTo="-translate-y-full opacity-0"
+      className="absolute -bottom-[48px] left-0 max-w-[100vw]"
+    >
+      <div className="w-full h-fit bg-white relative border-b border-slate-200">
+        <ScrollContainer
+          ref={scrollContainer as ScrollContainerRef}
+          className="flex w-full py-2.5 px-6 shadow-sm gap-x-3 overflow-y-hidden pr-24"
         >
-          <CaretRight weight="bold" className="w-4 h-4" />
-        </button>
-      </div>
+          {subnavItems.map(({ colors, icon, name }) => (
+            <div
+              key={name}
+              className={cn(
+                "flex items-center justify-center py-0.5 px-2 cursor-pointer rounded-full border-[1.5px] ",
+                colors ? colors : "text-gray-800 hover:bg-slate-100"
+              )}
+            >
+              {icon}
+              <span className={cn("text-sm whitespace-nowrap", icon && "ml-2")}>
+                {name}
+              </span>
+            </div>
+          ))}
+          {subnavItems.map(({ colors, icon, name }) => (
+            <div
+              key={name}
+              className={cn(
+                "flex items-center justify-center py-0.5 px-2 cursor-pointer rounded-full border-[1.5px] ",
+                colors ? colors : "text-gray-800 hover:bg-slate-100"
+              )}
+            >
+              {icon}
+              <span className={cn("text-sm whitespace-nowrap", icon && "ml-2")}>
+                {name}
+              </span>
+            </div>
+          ))}
+        </ScrollContainer>
+        <div
+          className={cn(
+            "absolute top-0 right-0 w-28 h-full bg-gradient-to-l from-white from-55% flex justify-end pr-6 transition-opacity ease-in-out duration-200",
+            showRightScroll ? "visible opacity-100" : "invisible opacity-0"
+          )}
+        >
+          <button
+            onClick={handleRightScroll}
+            className="rounded-full border-slate-200 hover:shadow-lg flex justify-center items-center border bg-white w-8 h-8 mt-2"
+          >
+            <CaretRight weight="bold" className="w-4 h-4" />
+          </button>
+        </div>
 
-      <div
-        className={cn(
-          "absolute top-0 left-0 w-28 h-full bg-gradient-to-r from-white from-55% flex justify-start pl-6 transition-opacity ease-in-out duration-200",
-          showLeftScroll ? "visible opacity-100" : "invisible opacity-0"
-        )}
-      >
-        <button
-          onClick={handleLeftScroll}
-          className="rounded-full border-slate-200 hover:shadow-lg flex justify-center items-center border bg-white w-8 h-8 mt-2"
+        <div
+          className={cn(
+            "absolute top-0 left-0 w-28 h-full bg-gradient-to-r from-white from-55% flex justify-start pl-6 transition-opacity ease-in-out duration-200",
+            showLeftScroll ? "visible opacity-100" : "invisible opacity-0"
+          )}
         >
-          <CaretLeft weight="bold" className="w-4 h-4" />
-        </button>
+          <button
+            onClick={handleLeftScroll}
+            className="rounded-full border-slate-200 hover:shadow-lg flex justify-center items-center border bg-white w-8 h-8 mt-2"
+          >
+            <CaretLeft weight="bold" className="w-4 h-4" />
+          </button>
+        </div>
       </div>
-    </div>
+    </Transition>
   );
 };
 

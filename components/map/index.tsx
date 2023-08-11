@@ -7,18 +7,22 @@ import MapView, {
   Source,
   Layer,
 } from "react-map-gl/maplibre";
-import type { MapRef } from "react-map-gl/maplibre";
+import type { LngLatLike, MapRef } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { atom, useAtom, useAtomValue } from "jotai";
+import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import MapControls from "./controls";
-import MapActions, { addPointModeAtom } from "./actions";
+import { addPointModeAtom } from "./actions";
 import MarkerCustom from "./marker";
 import { MarkerCustomType } from "@/types/map/marker";
 import { activeMapStyleAtom, mapStyles } from "./choose-map-style";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import PointPreview from "./point-preview";
 import { useLoadInitialMarkers } from "@/lib/hooks/map/useLoadInitialMarkers";
 import Loader from "../ui/loading";
+import { detailLocationIdAtom, detailOpenAtom } from "../discover/details";
+import { cn } from "@/lib/utils";
+import { Transition } from "@headlessui/react";
+import { LngLat } from "@/types/map/places-query";
 
 export const enlargeMapAtom = atom<boolean>(false);
 export const markersAtom = atom<MarkerCustomType[]>([]);
@@ -30,7 +34,35 @@ const Map = () => {
   const activeMapStyle = useAtomValue(activeMapStyleAtom);
   const [addPointMode, setAddPointMode] = useAtom(addPointModeAtom);
 
-  const { loading: markersLoading } = useLoadInitialMarkers();
+  const detailOpen = useAtomValue(detailOpenAtom);
+  const detailLocationId = useAtomValue(detailLocationIdAtom);
+
+  const { data, loading: markersLoading } = useLoadInitialMarkers();
+  const targetLocation = data.find(
+    (item) => item.location === detailLocationId
+  );
+
+  useEffect(() => {
+    if (!mapRef.current || !targetLocation) return;
+
+    if (detailOpen) {
+      mapRef.current.easeTo({
+        padding: { top: 0, right: 512 },
+        duration: 300,
+      });
+
+      const bbox = targetLocation?.feature?.features[0]?.bbox;
+      const min = bbox.slice(0, 2);
+      const max = bbox.slice(2, 4);
+
+      mapRef.current.fitBounds([min, max], { animate: false });
+    } else {
+      mapRef.current.easeTo({
+        padding: { top: 48, right: 0 },
+        duration: 300,
+      });
+    }
+  }, [detailOpen, targetLocation]);
 
   const handleOnMapClick = (event: MapLayerMouseEvent) => {
     if (!addPointMode) return;
@@ -50,7 +82,11 @@ const Map = () => {
     );
 
   return (
-    <div className="flex flex-1 relative overflow-hidden">
+    <div
+      className={cn(
+        "flex flex-1 relative overflow-hidden transition-transform ease-in-out duration-300"
+      )}
+    >
       <MapProvider>
         <MapView
           id="map"
@@ -59,37 +95,66 @@ const Map = () => {
             longitude: 0,
             latitude: 0,
             zoom: 0,
+            padding: { top: 48, bottom: 0, left: 0, right: 0 },
           }}
           mapStyle={mapStyles[activeMapStyle].url}
           style={{ flex: 1 }}
           cursor={addPointMode ? "crosshair" : undefined}
           onClick={handleOnMapClick}
         >
-          {markers.map(({ latitude, longitude, title, imageUrl }, i) => (
-            <Marker key={i} latitude={latitude} longitude={longitude}>
-              <MarkerCustom
-                locationId={title || "example"}
-                title={title || "Example"}
-                imageUrl={imageUrl || ""}
+          <Transition
+            show={!detailLocationId}
+            enter="transform transition-all duration-300 ease-in-out"
+            enterFrom="scale-0"
+            enterTo="scale-100"
+            leave="transform transition-all duration-300 ease-in-out"
+            leaveFrom="scale-100"
+            leaveTo="scale-0 "
+          >
+            {markers.map(({ latitude, longitude, title, imageUrl }, i) => (
+              <Marker key={i} latitude={latitude} longitude={longitude}>
+                <MarkerCustom
+                  locationId={title || "example"}
+                  title={title || "Example"}
+                  imageUrl={imageUrl || ""}
+                />
+              </Marker>
+            ))}
+          </Transition>
+          {targetLocation?.feature && (
+            <Source type="geojson" data={targetLocation.feature}>
+              <Layer
+                {...{
+                  id: "detail-layer-fill",
+                  type: "fill",
+                  paint: {
+                    "fill-color": "#2563eb",
+                    "fill-outline-color": "#2563eb",
+                    "fill-opacity": 0.1,
+                  },
+                }}
               />
-            </Marker>
-          ))}
-          {/* <Source type="geojson" data={data}>
-            <Layer
-              {...{
-                id: "point",
-                type: "circle",
-                paint: {
-                  "circle-radius": 10,
-                  "circle-color": "#007cbf",
-                  "circle-stroke-width": 1,
-                  "circle-stroke-color": "#fff",
-                },
-              }}
-            />
-          </Source> */}
+              <Layer
+                {...{
+                  id: "detail-layer-outline",
+                  type: "line",
+                  paint: {
+                    "line-color": "#2563eb",
+                    "line-width": 2.5,
+                  },
+                }}
+              />
+            </Source>
+          )}
         </MapView>
-        <div className="absolute top-4 right-4">
+        <div
+          className={cn(
+            "absolute transition-all ease-in-out duration-300",
+            detailOpen
+              ? "right-[calc(512px+16px)] top-4"
+              : "right-4 top-[calc(48px+16px)]"
+          )}
+        >
           <MapControls />
         </div>
         {/* <div className="absolute top-4 left-4">

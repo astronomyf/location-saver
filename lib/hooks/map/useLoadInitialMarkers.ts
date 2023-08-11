@@ -23,8 +23,14 @@ export const useLoadInitialMarkers = (allowSetMarkers = true) => {
           .filter((data: any) => !!data?.feature)
           .flatMap((data: any) =>
             data.feature.features.map((f: any) => ({
-              latitude: f.geometry.coordinates[1],
-              longitude: f.geometry.coordinates[0],
+              latitude:
+                f.geometry.type === "MultiPolygon"
+                  ? 68.20239194999999
+                  : f.geometry?.coordinates[1],
+              longitude:
+                f.geometry.type === "MultiPolygon"
+                  ? 13.680940656585705
+                  : f.geometry?.coordinates[0],
               title: data.location,
               imageUrl: data.url,
             }))
