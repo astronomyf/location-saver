@@ -1,8 +1,8 @@
 import { useLoadInitialMarkers } from "@/lib/hooks/map/useLoadInitialMarkers";
-import { atom, useAtom, useAtomValue } from "jotai";
+import { atom, useAtom } from "jotai";
 import { Transition } from "@headlessui/react";
 import Image from "next/image";
-import { IconArrowLeft, IconX } from "@tabler/icons-react";
+import { IconArrowLeft } from "@tabler/icons-react";
 import { CircleFlag } from "react-circle-flags";
 
 export const detailOpenAtom = atom<boolean>(false);
@@ -11,31 +11,13 @@ export const detailLocationIdAtom = atom<string | null>(null);
 const LocationDetails = () => {
   const { data, loading } = useLoadInitialMarkers(false);
   const [open, setOpen] = useAtom(detailOpenAtom);
-  const detailLocationId = useAtomValue(detailLocationIdAtom);
+  const [detailLocationId, setDetailLocationId] = useAtom(detailLocationIdAtom);
 
   const targetLocation = data.find(
     ({ location }) => location === detailLocationId
   );
 
   if (!targetLocation) return null;
-
-  // <div className="w-full h-64 relative overflow-hidden">
-  //           <Image
-  //             src={targetLocation.url}
-  //             alt={targetLocation.location}
-  //             fill
-  //             className="object-cover object-center"
-  //           />
-  //           {/* <div className="absolute bottom-0 left-0 w-full h-36"></div>
-  //         <div className="absolute top-2 left-4">
-  //           <div
-
-  //             className="rounded-full bg-black/50 backdrop-blur-sm flex justify-center items-center w-8 h-8 hover:shadow-sm cursor-pointer"
-  //           >
-  //             <IconX size={20} className="text-white" />
-  //           </div>
-  //         </div> */}
-  //         </div>
 
   return (
     <Transition
@@ -52,7 +34,10 @@ const LocationDetails = () => {
         <div className="w-full h-fit fixed bg-white z-10 shadow-sm border-b border-slate-200 px-4 py-2">
           <div
             className="flex items-center gap-x-2 hover:opacity-80 cursor-pointer select-none transition-opacity ease-in-out"
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setOpen(false);
+              setDetailLocationId(null);
+            }}
           >
             <IconArrowLeft size={20} />
             <span className="font-medium">Back</span>

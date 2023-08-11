@@ -4,8 +4,9 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { IconBookmark, IconX } from "@tabler/icons-react";
 import { PopoverClose } from "@radix-ui/react-popover";
-import { atom, useAtomValue } from "jotai";
+import { atom, useAtomValue, useSetAtom } from "jotai";
 import { cn } from "@/lib/utils";
+import { detailLocationIdAtom, detailOpenAtom } from "../discover/details";
 
 interface MarkerCustomProps {
   locationId: string;
@@ -25,6 +26,9 @@ const MarkerCustom = ({
   const container = document.getElementById("map");
 
   const highlightMarker = useAtomValue(highlightMarkerAtom);
+  const setDetailLocationId = useSetAtom(detailLocationIdAtom);
+  const setDetailOpen = useSetAtom(detailOpenAtom);
+
   const isSelected = highlightMarker === locationId;
 
   if (!container) return null;
@@ -60,7 +64,15 @@ const MarkerCustom = ({
           <p className="text-slate-400 text-sm">{description}</p>
 
           <div className="flex justify-between gap-x-2 pt-6">
-            <Button className="flex-1 whitespace-nowrap">Show details</Button>
+            <Button
+              className="flex-1 whitespace-nowrap"
+              onClick={() => {
+                setDetailLocationId(locationId);
+                setDetailOpen(true);
+              }}
+            >
+              Show details
+            </Button>
             <Button className="w-fit" variant="soft">
               <IconBookmark size={20} className="text-primary" />
             </Button>

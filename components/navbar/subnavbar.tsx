@@ -72,7 +72,9 @@ export const subnavItems = [
   },
 ];
 
-type ScrollContainerRef = ComponentPropsWithRef<typeof ScrollContainer>["ref"];
+export type ScrollContainerRef = ComponentPropsWithRef<
+  typeof ScrollContainer
+>["ref"];
 
 const Subnavbar = () => {
   const scrollContainer = useRef<HTMLElement>(null);

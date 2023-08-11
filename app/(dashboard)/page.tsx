@@ -5,8 +5,6 @@ import PopularDestinations from "@/components/discover/popular-destinations";
 import Map, { enlargeMapAtom } from "@/components/map";
 import { cn } from "@/lib/utils";
 import { useAtomValue } from "jotai";
-import { ScrollContainer } from "react-indiana-drag-scroll";
-import "react-indiana-drag-scroll/dist/style.css";
 
 export default function MapPage() {
   const enlargeMap = useAtomValue(enlargeMapAtom);
@@ -21,9 +19,7 @@ export default function MapPage() {
       >
         <Map />
       </div>
-      <ScrollContainer className="absolute bottom-5 pb-2 left-0 pl-6 h-fit w-full">
-        <PopularDestinations />
-      </ScrollContainer>
+      <PopularDestinations />
       <LocationDetails />
     </div>
   );

@@ -7,9 +7,9 @@ import MapView, {
   Source,
   Layer,
 } from "react-map-gl/maplibre";
-import type { LngLatLike, MapRef } from "react-map-gl/maplibre";
+import type { MapRef } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
+import { atom, useAtom, useAtomValue } from "jotai";
 import MapControls from "./controls";
 import { addPointModeAtom } from "./actions";
 import MarkerCustom from "./marker";
@@ -22,7 +22,8 @@ import Loader from "../ui/loading";
 import { detailLocationIdAtom, detailOpenAtom } from "../discover/details";
 import { cn } from "@/lib/utils";
 import { Transition } from "@headlessui/react";
-import { LngLat } from "@/types/map/places-query";
+import { useGetSymbolLayer } from "@/lib/hooks/map/useGetSymbolLayer";
+import bbox from "@turf/bbox";
 
 export const enlargeMapAtom = atom<boolean>(false);
 export const markersAtom = atom<MarkerCustomType[]>([]);
@@ -37,6 +38,8 @@ const Map = () => {
   const detailOpen = useAtomValue(detailOpenAtom);
   const detailLocationId = useAtomValue(detailLocationIdAtom);
 
+  const symbolLayerId = useGetSymbolLayer(mapRef.current);
+
   const { data, loading: markersLoading } = useLoadInitialMarkers();
   const targetLocation = data.find(
     (item) => item.location === detailLocationId
@@ -46,16 +49,18 @@ const Map = () => {
     if (!mapRef.current || !targetLocation) return;
 
     if (detailOpen) {
-      mapRef.current.easeTo({
-        padding: { top: 0, right: 512 },
-        duration: 300,
-      });
-
-      const bbox = targetLocation?.feature?.features[0]?.bbox;
-      const min = bbox.slice(0, 2);
-      const max = bbox.slice(2, 4);
-
-      mapRef.current.fitBounds([min, max], { animate: false });
+      const feature = targetLocation?.feature?.features;
+      const [minLng, minLat, maxLng, maxLat] = bbox(feature[0]);
+      mapRef.current.fitBounds(
+        [
+          [minLng, minLat],
+          [maxLng, maxLat],
+        ],
+        {
+          padding: { top: 0, right: 512 + 50, bottom: 50, left: 50 },
+          duration: 300,
+        }
+      );
     } else {
       mapRef.current.easeTo({
         padding: { top: 48, right: 0 },
@@ -125,24 +130,26 @@ const Map = () => {
             <Source type="geojson" data={targetLocation.feature}>
               <Layer
                 {...{
+                  id: "detail-layer-outline",
+                  type: "line",
+                  paint: {
+                    "line-color": "#2563eb",
+                    "line-width": 2,
+                  },
+                }}
+                beforeId={symbolLayerId}
+              />
+              <Layer
+                {...{
                   id: "detail-layer-fill",
                   type: "fill",
                   paint: {
                     "fill-color": "#2563eb",
                     "fill-outline-color": "#2563eb",
-                    "fill-opacity": 0.1,
+                    "fill-opacity": 0.3,
                   },
                 }}
-              />
-              <Layer
-                {...{
-                  id: "detail-layer-outline",
-                  type: "line",
-                  paint: {
-                    "line-color": "#2563eb",
-                    "line-width": 2.5,
-                  },
-                }}
+                beforeId={symbolLayerId}
               />
             </Source>
           )}
