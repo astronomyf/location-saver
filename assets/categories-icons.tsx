@@ -7,11 +7,11 @@ export const DesertIcon = ({ className }: { className?: string }) => (
     width="24"
     height="24"
     viewBox="0 0 24 24"
-    stroke-width="1.7"
+    strokeWidth="1.7"
     stroke="currentColor"
     fill="none"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
     <path d="M6 9v1a3 3 0 0 0 3 3h1" />
@@ -43,11 +43,11 @@ export const BeachIcon = ({ className }: { className?: string }) => (
     width="24"
     height="24"
     viewBox="0 0 24 24"
-    stroke-width="1.7"
+    strokeWidth="1.7"
     stroke="currentColor"
     fill="none"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
     <path d="M17.553 16.75a7.5 7.5 0 0 0 -10.606 0" />
@@ -108,11 +108,11 @@ export const VolcanoIcon = ({ className }: { className?: string }) => (
     width="24"
     height="24"
     viewBox="0 0 24 24"
-    stroke-width="1.7"
+    strokeWidth="1.7"
     stroke="currentColor"
     fill="none"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
     <path d="M9 8v-1a2 2 0 1 0 -4 0" />
@@ -130,11 +130,11 @@ export const ForestIcon = ({ className }: { className?: string }) => (
     width="24"
     height="24"
     viewBox="0 0 24 24"
-    stroke-width="1.7"
+    strokeWidth="1.7"
     stroke="currentColor"
     fill="none"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
     <path d="M16 5l3 3l-2 1l4 4l-3 1l4 4h-9" />

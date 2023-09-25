@@ -107,6 +107,7 @@ const Map = () => {
           cursor={addPointMode ? "crosshair" : undefined}
           onClick={handleOnMapClick}
         >
+          {/* Fix this transition, not working! */}
           <Transition
             show={!detailLocationId}
             enter="transform transition-all duration-300 ease-in-out"

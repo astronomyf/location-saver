@@ -1,34 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+WIP project (very raw) that allow users to search and save relevant locations across the world, mostly focused on natural wonders and places of interest.
 
-## Getting Started
+<p float="left">
+  <img src="./images/overview.png" width="49%" />
+  <img src="./images/command-bar.png" width="49%" />
+</p>
 
-First, run the development server:
+## How to run it
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Given the work-in-progress status of the project, I'm not gonna release a production version of the app just yet. If you want to try it out, you'll have to clone the repo and run it locally. You can use this project as inspiration, or just to check out the code.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You can make it work by following these steps:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Replace the env variables with your on in your local `.env.local` file.
+   _I'm using the free MapTiler API and Firebase, so you should create an account on both platforms and get your own API keys._
+2. Run `npm i` in the root folder
+3. Run `npm run dev` in the root folder
